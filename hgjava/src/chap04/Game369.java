@@ -119,17 +119,28 @@ public class Game369 {
 			System.out.print("## 가위(0) 바위(1) 보(2) : ");
 			hDec = scInput.nextInt();
 			cDec = (int)(Math.random() * 3);
-			
-			if(hDec > cDec || hDec == 0 && cDec == 2) {
-				System.out.printf("사람 %d, 컴 %d : 사람 승리\n", hDec, cDec);
+			if(hDec == 0 && cDec == 2) hDec = 3;
+			if(hDec == 2 && cDec == 0) cDec = 3;
+						
+			if(hDec > cDec) {
+				System.out.printf("사람 %d, 컴 %d : 사람 승리\n", hDec % 3, cDec % 3);
 				hScore++;
 			}
-			if(hDec < cDec || hDec == 2 && cDec == 0) {
-				System.out.printf("사람 %d, 컴 %d : 컴 승리\n", hDec, cDec);
+			else if(hDec < cDec) {
+				System.out.printf("사람 %d, 컴 %d : 컴 승리\n", hDec % 3, cDec % 3);
 				cScore++;
 			}
-			if(hDec == cDec) {
-				System.out.printf("사람 %d, 컴 %d : 무승부\n", hDec, cDec);
+			else if(hDec == cDec) {
+				System.out.printf("사람 %d, 컴 %d : 무승부\n", hDec % 3, cDec % 3);
+			}
+			
+			if(hScore == 3) {
+				System.out.printf("최종 스코어 %d : %d  사람 승리!", hScore, cScore);
+				run = false;
+			}
+			if(cScore == 3) {
+				System.out.printf("최종 스코어 %d : %d  컴퓨터 승리!", hScore, cScore);
+				run = false;
 			}
 		}
 		
