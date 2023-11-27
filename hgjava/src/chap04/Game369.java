@@ -108,6 +108,7 @@ public class Game369 {
 //		scInput.close();
 		
 		//Q. 가위바위보 프로그램
+		//github java_master repository에 추가됨
 		int hDec = 0;
 		int cDec = 0;
 		int hScore = 0;
