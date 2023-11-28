@@ -2,11 +2,11 @@ package todo.p20231128;
 
 public class Board {
 	// 필드
-	int num;
-	String title;
-	String writer;
-	String content;
-	String date;
+	private int num;
+	private String title;
+	private String writer;
+	private String content;
+	private String date;
 	
 	// 생성자
 	public Board(){}
@@ -20,10 +20,30 @@ public class Board {
 		this.date = date;
 	}
 	
+	// 메소드
 	void showInfo() {
-		System.out.printf("%d\t %s\t %s\t", num, title, writer);
+		System.out.printf("%d\t %s\t %s\n", num, title, writer);
+	}
+	
+	void showAllWriting(Board[] boards, int input) {
+		boolean exist = false;
+		System.out.println("---------------------------------------------");
+		for(int i = 0; i < boards.length; i++) {
+			boards[i].showInfo();
+			if(boards[i] != null && boards[i].getNum() == input) {
+				System.out.println("---------------------------------------------");
+				System.out.printf("번호: %d\t 제목: %s\n작성자: %s\n내용: %s\n일시: %s\n", 
+						boards[i].num, boards[i].title, boards[i].writer, boards[i].content, boards[i].date);
+				System.out.println("---------------------------------------------");
+				exist = true;
+			}
+		}
+		if(!exist) {
+			System.out.println("찾는 게시물 번호가 없습니다.");
+		}
 	}
 
+	// get / set
 	public int getNum() {
 		return num;
 	}
@@ -63,19 +83,6 @@ public class Board {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
-	boolean addWriting(Board brd) {
-		Board[] board = null;
-		for(int i = 0; i < board.length; i++) {
-			if(board[i] == null) {
-				board[i] = brd;
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	
 	
 }
 
