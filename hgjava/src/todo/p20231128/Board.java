@@ -21,20 +21,29 @@ public class Board {
 	}
 	
 	// 메소드
-	void showInfo() {
+	
+	boolean addArticle(Board[] boards, Board board) {
+		boolean exist = false;
+		for(int i = 0; i < boards.length; i++) {
+			if(boards[i] == null) {
+				boards[i] = board;
+				exist = true;
+				break;
+			}
+		}
+		return exist;
+	}
+	void showList() {
 		System.out.printf("%d\t %s\t %s\n", num, title, writer);
 	}
 	
-	void showAllWriting(Board[] boards, int input) {
+	void showContent(Board[] boards, int input) {
 		boolean exist = false;
-		System.out.println("---------------------------------------------");
 		for(int i = 0; i < boards.length; i++) {
-			boards[i].showInfo();
 			if(boards[i] != null && boards[i].getNum() == input) {
 				System.out.println("---------------------------------------------");
-				System.out.printf("번호: %d\t 제목: %s\n작성자: %s\n내용: %s\n일시: %s\n", 
+				System.out.printf("번호: %d\t/ 제목: %s\n작성자: %s\n내용: %s\n일시: %s\n", 
 						boards[i].num, boards[i].title, boards[i].writer, boards[i].content, boards[i].date);
-				System.out.println("---------------------------------------------");
 				exist = true;
 			}
 		}

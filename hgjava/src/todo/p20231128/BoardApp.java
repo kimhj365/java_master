@@ -13,7 +13,6 @@ public class BoardApp {
 		boards[2] = new Board(3,"SQL이 기대됩니다", "user03", "정 말 기 대 됩 니 다 ", "2023-11-28");
 		Board board = new Board();
 		boolean run = true;
-		boolean exist = false;
 		Scanner scn = new Scanner(System.in);
 
 		while(run) {
@@ -38,15 +37,8 @@ public class BoardApp {
 				System.out.print("일시 >> ");
 				String date = scn.nextLine();
 				Board brd = new Board(num, title, writer, content, date);
-				exist = false;
-				for(int i = 0; i < boards.length; i++) {
-					if(boards[i] == null) {
-						boards[i] = brd;
-						exist = true;
-						break;
-					}
-				}
-				if(exist) {
+				
+				if(board.addArticle(boards, brd)) {
 					System.out.println("게시물 등록이 완료되었습니다");
 				}
 				else {
@@ -59,17 +51,16 @@ public class BoardApp {
 				System.out.println("---------------------------------------------");
 				for(int i = 0; i < boards.length; i++) {
 					if(boards[i] != null) {
-						boards[i].showInfo();
+						boards[i].showList();
 					}
 				}
-				System.out.println("---------------------------------------------");
 				break;
 			// 상세조회
 			case 3:
 				System.out.println("< 상세 조회 >");
 				System.out.print("조회할 게시글 번호를 입력하세요 >> ");
 				int input = Integer.parseInt(scn.nextLine());
-				board.showAllWriting(boards, input);
+				board.showContent(boards, input);
 				break;
 			case 4:
 				System.out.println("< 프로그램 종료 >");
@@ -78,6 +69,7 @@ public class BoardApp {
 			}	// end of switch
 		
 		}	// end of while
+		scn.close();
 		System.out.println("end of program");
 	}	// end of main()
 
