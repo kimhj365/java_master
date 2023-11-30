@@ -1,0 +1,28 @@
+FriendApp.java
+
+Friend.java	=> Friend[]
+친구 : 이름, 연락처 
+
+UnivFriend.java	=> UnivFriend[]
+친구 : 이름, 연락처 + 학교, 학과 
+
+CompFriend.java	=> CompFriend[]
+친구 : 이름, 연락처 + 회사, 부서
+
+각각 다 다른 타입으로 지정하면 중복, 낭비 생김
+공통된 부분 활용하면서 다른 부분만 넣고 싶을때 => 상속
+공통정보를 부모 클래스에 지정 / 서로 다른 정보를 자식 클래스에 지정
+
+<상속>
+부모 <- 자식: 자식은 부모와 동일 타입으로 취급해줌
+
+FriendApp.java
+
+Friend.java	(부모 클래스) => Friend[] 
+친구 : 이름, 연락처 
+
+UnivFriend.java	(자식 클래스) => 
+친구 : 이름, 연락처 + 학교, 학과 
+
+CompFriend.java	(자식 클래스)	=>
+친구 : 이름, 연락처 + 회사, 부서

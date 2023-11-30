@@ -3,7 +3,11 @@ package todo.p20231128;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Board {
+import lombok.Data;
+
+@Data
+
+public class Board {	// 데이터를 담아놓기 위한 용도 클래스.
 	// 필드
 	private int num;
 	private String title;
@@ -35,10 +39,12 @@ public class Board {
 	
 	// 3. 필드값 전부 수동으로 받는 생성자
 	public Board(int num, String title, String writer, String content, String writeDate) {
-		this.num = num;
-		this.title = title;
-		this.writer = writer;
-		this.content = content;
+//		this();	// 기본 생성자 호출 => 여기서 this == 생성자.
+		this(num, title, writer, content);	//인수 4개 받는 2.생성자 호출 + 없는 것(날짜)만 추가해줌.
+//		this.num = num;
+//		this.title = title;
+//		this.writer = writer;
+//		this.content = content;
 		this.writeDate = writeDate;
 	}
 	
@@ -58,12 +64,12 @@ public class Board {
 //	}
 //	
 	// 2. 목록 출력 메소드
-	void showInfo() {
+	public void showInfo() {
 		System.out.printf(" %d\t %s\t %s\t\t %s\n", num, title, writer, writeDate);
 	}
 	
 	// 3. 글 내용 출력 메소드
-	String showDetailInfo() {
+	public String showDetailInfo() {
 //		System.out.println("---------------------------------------------");
 //		System.out.printf("번호: %d\t/ 제목: %s\n작성자: %s\n내용: %s\n일시: %s\n", 
 //				num, title, writer, content, date);
@@ -75,45 +81,7 @@ public class Board {
 	}
 			
 	// getter / setter 메소드
-	public int getNum() {
-		return num;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public String getWriter() {
-		return writer;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public String getWriteDate() {
-		return writeDate;
-	}
-
-	public void setNum(int num) {
-		this.num = num;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public void setWriteDate(String date) {
-		this.writeDate = date;
-	}
+	
 	
 }
 

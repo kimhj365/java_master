@@ -4,17 +4,20 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 // 저장소: boards
-public class BoardExe {
+public class BoardExe {	// 여러 기능 처리하는 용도의 클래스.
 	// 필드
-	Board[] boards;
+	static Board[] boards;	// static 변수로 선언.
 	
 	// 생성자
 	BoardExe(){
-		boards = new Board[100];	// 크기 100 배열 기본 생성
+//		boards = new Board[100];	// 크기 100 배열 기본 생성 => static 변수는 인스턴스 만들 필요 없음
+	}
+	static {
+		boards = new Board[100];	//	
 	}
 	
 	// 0-1. 초기값 몇개 미리 생성
-	void initData() {
+	public static void initData() {
 //		boards[0] = new Board(1, "자바게시판 입니다", "user01", "오늘은 숙제로 자바게시판을 만들어봅시다.", "2023-11-27");
 //		boards[1] = new Board(2, "공부합시다\t", "user02", "자바를 공부합시다.", "2023-11-28");
 //		//board[2] <= 5번글
@@ -32,7 +35,7 @@ public class BoardExe {
 	}
 	
 	// 0-2. 신규 번호 자동 생성 : 현재 글 번호 +1
-	int getSequence() {
+	public static int getSequence() {
 		int seqNum = 1;
 		int maxNum = 0;	// 최대 번호 값 저장
 		
@@ -46,7 +49,7 @@ public class BoardExe {
 	}
 	
 	// 1. 등록 메소드
-	boolean addArticle(Board board) {
+	public static boolean addArticle(Board board) {
 		for(int i = 0; i < boards.length; i++) {
 			if(boards[i] == null) {
 				boards[i] = board;
@@ -57,7 +60,7 @@ public class BoardExe {
 	}
 	
 	// 2. 목록 조회 메소드 + 정렬 => Board[] 배열 반환
-	Board[] showList() {
+	public static Board[] showList() {
 		// 정렬 : i번 요소를 i+1번 요소와 비교 => 자리 바꾸기
 		Board temp = null;
 		for (int i = 0; i < boards.length - 1; i++) {
@@ -75,7 +78,7 @@ public class BoardExe {
 	}
 	
 	// 2-1. 게시판 페이지 배열 만들기 => 이 부분 좀 더 공부 필요!!
-	Board[] pageList(Board[] ary, int page) {	// 기존 Board[] 배열 가져옴.
+	public static Board[] pageList(Board[] ary, int page) {	// 기존 Board[] 배열 가져옴.
 		Board[] resultAry = new Board[5];
 		// 한 페이지에 게시물 5개 담는 배열 생성 
 		// => 기존 배열 5개씩 잘라서 붙여넣기.
@@ -83,7 +86,7 @@ public class BoardExe {
 		
 		int start = (page -1) * 5;	// 0 부터 시작
 		int end = page * 5;	// 6 전까지 (5개)
-		int j = 0;	// 
+		int j = 0;
 		
 		for (int i = 0; i < ary.length; i++) {
 			if(i >= start && i < end) {
@@ -94,7 +97,7 @@ public class BoardExe {
 	}
 	
 	// 3. 단건조회. 매개변수 : 글번호 / 반환값 : Board => Board 클래스에서 출력문
-	Board showContent(int num) {
+	public static Board showContent(int num) {
 		for(int i = 0; i < boards.length; i++) {
 			if(boards[i] != null && boards[i].getNum() == num) {
 				return boards[i];
@@ -104,7 +107,7 @@ public class BoardExe {
 	}
 	
 	// 4. 수정 메소드
-	boolean modifyContent(int num, String title, String content) {
+	public static boolean modifyContent(int num, String title, String content) {
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		for(int i = 0; i < boards.length; i++) {
@@ -119,7 +122,7 @@ public class BoardExe {
 	}
 	
 	// 5. 삭제 메소드
-	boolean removeContent(int num) {
+	public static boolean removeContent(int num) {
 		for(int i = 0; i < boards.length; i++) {
 			if(boards[i] != null && boards[i].getNum() == num) {
 				boards[i] = null;
@@ -130,7 +133,7 @@ public class BoardExe {
 	}
 	
 	// 6. 사용자가 해당 글 번호 수정, 삭제 권한 체크 메소드 => boolean.
-	boolean checkResponsibility(String id, int num) {
+	public static boolean checkResponsibility(String id, int num) {
 		for (int i = 0; i < boards.length; i++) {
 			if(boards[i] != null//
 					&& boards[i].getNum() == num//
@@ -142,7 +145,7 @@ public class BoardExe {
 	}
 	
 	// 7. 게시글을 담고 있는 배열에서 값이 있는 건수를 반환. = 데이터 건수
-	int getBoardCount() {
+	public static int getBoardCount() {
 		int realCount = 0;
 		for (int i = 0; i < boards.length; i++) {
 			if(boards[i] != null) {
