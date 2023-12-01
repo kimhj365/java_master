@@ -24,7 +24,7 @@ public class Friend {
 	}
 	
 	public String showInfo() {
-		return "이름은 " + name + ", 연락처는 " + phone + " 입니다.";
+		return "이름은 " + name + ", 연락처는 " + phone;
 		
 	}
 

@@ -77,8 +77,16 @@ public class BoardApp {
 	
 	private void getBoard() {
 		System.out.println("< 상세 조회 >");
-		System.out.print("조회할 게시글 번호를 입력하세요 \n>> ");
-		int num = Integer.parseInt(scn.nextLine());
+		int num = 0;
+		while(true) {
+			System.out.print("조회할 게시글 번호를 입력하세요 \n>> ");
+			try {
+				num = Integer.parseInt(scn.nextLine());
+				break;
+			} catch(NumberFormatException e) {
+				System.out.println("정확한 번호를 입력하세요");
+			}
+		}
 		Board result = BoardExe.showContent(num);
 		if (result != null) {
 			System.out.println("------------------------------------------------------------------");
@@ -179,7 +187,15 @@ public class BoardApp {
 			System.out.println("┃ 1.게시물 등록 ┃ 2.목록 ┃ 3.상세조회 ┃ 4.수정 ┃ 5.삭제 ┃ 6.종료 ┃");
 			System.out.println("┗━━━━━━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━┻━━━━━━━━┛");
 			System.out.print("동작을 입력하세요 \n>> ");
-			int menu = Integer.parseInt(scn.nextLine());
+			
+			
+			int menu = 0;
+			try {
+				menu = Integer.parseInt(scn.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("정확한 메뉴를 선택하세요");
+				continue;
+			}
 
 			switch (menu) {
 			// 1. 게시물 등록
@@ -210,6 +226,9 @@ public class BoardApp {
 				System.out.println("< 프로그램 종료 >");
 				scn.close();
 				run = false;
+			default:
+				System.out.println("정확한 메뉴를 선택하세요");
+				break;
 			} // end of switch
 
 		} // end of while

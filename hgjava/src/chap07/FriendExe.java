@@ -3,6 +3,13 @@ package chap07;
 public class FriendExe {
 
 	static Friend[] storage = new Friend[10];
+	
+	// 0. 초기값 설정
+	public static void initData(){
+		storage[0] = new Friend("김현준", "010-1111-1111");
+		storage[1] = new UnivFriend("박지웅", "010-2222-2222", "예담", "자바");
+		storage[2] = new CompFriend("최승민", "010-3333-3333", "태왕", "개발");
+	}
 
 	// 1. 등록.
 	public static boolean addFriend(Friend friend) {
@@ -37,12 +44,7 @@ public class FriendExe {
 				count++;
 			}
 		}
-		if(count != 0) {
-			return result;
-		}
-		else{
-			return null;
-		}
+		return result;
 	}
 
 	// 결과값 null 여부로 체크 가능.
@@ -54,5 +56,5 @@ public class FriendExe {
 		}
 		return null;
 	}
-
+	
 }

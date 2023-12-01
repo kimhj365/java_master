@@ -6,14 +6,11 @@ import java.util.Date;
 // 저장소: boards
 public class BoardExe {	// 여러 기능 처리하는 용도의 클래스.
 	// 필드
-	static Board[] boards;	// static 변수로 선언.
+	static Board[] boards = new Board[100];	// static 변수로 선언.
 	
 	// 생성자
 	BoardExe(){
 //		boards = new Board[100];	// 크기 100 배열 기본 생성 => static 변수는 인스턴스 만들 필요 없음
-	}
-	static {
-		boards = new Board[100];	//	
 	}
 	
 	// 0-1. 초기값 몇개 미리 생성

@@ -10,6 +10,7 @@ public class FriendApp {
 	public static void main(String[] args) {
 
 		boolean run = true;
+		FriendExe.initData();
 		
 		while(run) {
 			System.out.println();
@@ -39,11 +40,14 @@ public class FriendApp {
 	
 	// 1. 등록.
 	private static void addFriend() {
-		System.out.println("┏━━━━━━━━┳━━━━━━━━┳━━━━━━━━┓");
-		System.out.println("┃ 1.친구 ┃ 2.학교 ┃ 3.회사 ┃");
-		System.out.println("┗━━━━━━━━┻━━━━━━━━┻━━━━━━━━┛");
+		System.out.println("┌────────┬────────┬────────┬──────────┐");
+		System.out.println("│ 1.친구 │ 2.학교 │ 3.회사 │ 4.나가기 │");
+		System.out.println("└────────┴────────┴────────┴──────────┘");
 		System.out.print("분류를 선택하세요 \n>> ");
 		int subMenu = Integer.parseInt(scn.nextLine());
+
+		if(subMenu == 4) return;
+		
 		System.out.print("이름 \n>> ");
 		String name = scn.nextLine();
 		System.out.print("연락처 \n>> ");
@@ -72,7 +76,7 @@ public class FriendApp {
 			friend = new CompFriend(name, phone, comp, dept);
 		}
 		else {
-			System.out.println("1, 2, 3  중에서 선택하세요");
+			System.out.println("정확한 분류를 선택하세요");
 			return;
 		}
 		// 배열에 추가
@@ -87,20 +91,21 @@ public class FriendApp {
 	
 	// 2. 목록.
 	private static void friendList() {
-		System.out.println("=========================================");
+		System.out.println("< 친구 목록 >");
 		FriendExe.friendList();
-		System.out.println("=========================================");
 
 	} 
 	
 	// 3. 단건 조회.
 	private static void getFriend() { // 이름 조회, 연락처 조회
-		System.out.println("┏━━━━━━━━┳━━━━━━━━━━┓");
-		System.out.println("┃ 1.이름 ┃ 2.연락처 ┃");
-		System.out.println("┗━━━━━━━━┻━━━━━━━━━━┛");
+		System.out.println("┌────────┬──────────┬──────────┐");
+		System.out.println("│ 1.이름 │ 2.연락처 │ 3.나가기 │");
+		System.out.println("└────────┴──────────┴──────────┘");
 		System.out.print("검색 분류를 입력하세요 \n>> ");
 		int subMenu = Integer.parseInt(scn.nextLine());
 		String searchCond = "";
+		
+		if(subMenu == 3) return;
 		
 		if(subMenu == 1) {
 			System.out.print("이름을 입력하세요 \n>> ");
@@ -108,16 +113,16 @@ public class FriendApp {
 			Friend[] friend = null; 
 			friend = FriendExe.searchName(searchCond);
 			
-			if(friend == null){
-				System.out.println("정확한 이름을 입력하세요");
-			}
-			else {
-				for (int i = 0; i < friend.length; i++) {
-					if(friend[i] != null) {
-						System.out.println(friend[i].showInfo());
-					}
-
+			boolean searchCheck = false;
+			for (int i = 0; i < friend.length; i++) {
+				if(friend[i] != null) {
+					System.out.println("< 검색 결과 >");
+					System.out.println(friend[i].showInfo());
+					searchCheck = true;
 				}
+			}
+			if(!searchCheck) {
+				System.out.println("검색 결과가 없습니다");
 			}
 		}
 		
@@ -127,14 +132,15 @@ public class FriendApp {
 			Friend friend = null;
 			friend = FriendExe.searchPhone(searchCond);
 			if(friend != null) {
+				System.out.println("< 검색 결과 >");
 				System.out.println(friend.showInfo());
 			}
 			else {
-				System.out.println("정확한 연락처를 입력하세요");
+				System.out.println("검색 결과가 없습니다");
 			}
 		}
 		else {
-			System.out.println("1 또는 2 중에서 선택하세요");
+			System.out.println("정확한 분류를 선택하세요");
 		}
 	} 
 	
