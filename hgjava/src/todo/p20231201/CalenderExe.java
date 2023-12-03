@@ -1,6 +1,6 @@
 package todo.p20231201;
 
-public class CalenderEXe {
+public class CalenderExe {
 	public static void main(String[] args) {
 		// 12월 달력 만들기(금요일부터 시작).
 		String[] days = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
