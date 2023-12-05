@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// 저장공간 :  배열
+// 저장공간 : ArrayList
 // 추가/수정/삭제/목록/단건 조회
 public class StudentExe {
 	
@@ -36,25 +36,32 @@ public class StudentExe {
 		}
 		return menu;
 	}
+	// 0-1. 자동 번호 매기기
+	String autoNumbering() {
+		String[] inAry = students.get(students.size()-1).getStuNum().split("-");
+		int inNum = Integer.parseInt(inAry[1]);
+		String inStr ="23-"+ String.format("%03d", inNum + 1);
+		return inStr;
+	}
 	
 	// 1. 추가
-	void addStudent() {
+	void addStudent(String num) {
 		System.out.println("< 학생 등록 >");
-		System.out.print("학생번호 학생이름 영어점수 수학점수 순으로 입력 \n>> ");
+		System.out.print("학생이름 영어점수 수학점수 순으로 입력 \n>> ");
 	
 		String input = scn.nextLine();
 		String[] inAry;
-		String num;
+//		String num;
 		String name;
 		int eng;
 		int math;
 		
 		try {
 			inAry = input.split(" ");
-		num = inAry[0];
-		name = inAry[1];
-		eng = Integer.parseInt(inAry[2]);
-		math = Integer.parseInt(inAry[3]);
+//		num = inAry[0];
+		name = inAry[0];
+		eng = Integer.parseInt(inAry[1]);
+		math = Integer.parseInt(inAry[2]);
 		} catch(Exception e) {
 			System.out.println("올바른 학생 정보를 입력하세요");
 			return;
@@ -92,7 +99,7 @@ public class StudentExe {
 		if(!chk) System.out.println("조회 실패하였습니다\n");
 	}
 	
-	//수정
+	// 4. 학생 정보 수정.
 	void modifyStudent() {
 		
 		System.out.println("< 학생 정보 수정 >");
@@ -127,7 +134,7 @@ public class StudentExe {
 			System.out.println("수정 실패하였습니다\n");
 	}
 	
-	//삭제
+	// 5. 학생 정보 삭제.
 	void removeStudent() {
 		System.out.println("< 학생 정보 삭제 > ");
 		System.out.print("삭제하려는 학생 번호 입력 \n>> ");

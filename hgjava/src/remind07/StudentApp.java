@@ -13,7 +13,7 @@ public class StudentApp {
 			switch(menu) {
 			// 1.학생 추가.
 			case 1: 
-				exe.addStudent();
+				exe.addStudent(exe.autoNumbering());
 				break;
 			// 2.전체 목록 조회
 			case 2:
