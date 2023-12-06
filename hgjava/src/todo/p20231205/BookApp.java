@@ -9,6 +9,11 @@ public class BookApp {
 		
 		while(run) {
 
+			// 뭔가 깔끔하게 만들고 싶어서 BookApp에서는 메소드 호출만 하고 나머지는 BookExe로 다 몰아버림
+			// 근데 별로 안 좋은 방법 같음. 
+			// BookExe에서 Scanner 값까지 받지 말고 그냥 BookApp에서 입력 받아서 메소드 인수로 주고
+			// BookExe에서는 메소드 내용 정의만 하는게 더 좋은 방법 같음
+			
 			// 0. 프로그램 시작
 			int menu = exe.progStart();
 			

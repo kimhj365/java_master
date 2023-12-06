@@ -9,22 +9,22 @@ public class Emp {
 	private String num;
 	private String name;
 	private String tel;
-	private String date;
+	private String joinDate;
 	private int salary;
 	
 	Emp(){}
 
-	public Emp(String num, String name, String tel, String date, int salary) {
+	public Emp(String num, String name, String tel, String joinDate, int salary) {
 		super();
 		this.num = num;
 		this.name = name;
 		this.tel = tel;
-		this.date = date;
+		this.joinDate = joinDate;
 		this.salary = salary;
 	}
 	
 	void showInfo() {
-		System.out.printf("%s %s %s %s %d\n", num, name, tel, date, salary);
+		System.out.printf("%s %s %s %s %d\n", num, name, tel, joinDate, salary);
 	}
 	
 }
