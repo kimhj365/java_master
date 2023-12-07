@@ -144,5 +144,6 @@ public class Game369 {
 			}
 		}
 		
+		scInput.close();
 	}
 }

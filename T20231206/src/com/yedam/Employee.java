@@ -16,6 +16,7 @@ public class Employee {
 	Employee() {
 	}
 
+	// 입사일자 안받았을때 오늘 날짜로 자동 생성 => sdf로 String타입 저장.
 	public Employee(String empNo, String empName, String empTel, int salary) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
@@ -26,6 +27,7 @@ public class Employee {
 		this.salary = salary;
 	}
 
+	// 입사 일자 받는 경우 생성자.
 	public Employee(String empNo, String empName, String empTel, String empDate, int salary) {
 		this.empNo = empNo;
 		this.empName = empName;
@@ -35,16 +37,17 @@ public class Employee {
 	}
 
 	// 메소드.
-	// 목록 조회 메소드
+	// 목록 조회(전화번호) 메소드.
 	void showInfoTel() {
 		System.out.println(empNo + " " + empName + " " + empTel);
 	}
 	
-	// 입사 날짜 조회 메소드
+	// 입사 날짜 조회 메소드.
 	void showInfoDate() {
 		System.out.println(empNo + " " + empName + " " + empDate);
 	}
 
+	// getter / setter.
 	public String getEmpNo() {
 		return empNo;
 	}

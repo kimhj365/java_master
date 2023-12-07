@@ -6,6 +6,7 @@ public class EmpApp {
 
 	public static void main(String[] args) {
 
+		//ExpDAO 인스턴스 dao 생성.
 		EmpDAO dao = new EmpDAO();
 		Scanner scn = new Scanner(System.in);
 		boolean run = true;
@@ -17,6 +18,7 @@ public class EmpApp {
 			System.out.println("┗━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━┻━━━━━━━━┻━━━━━━━━━━━━━━━━━━━━━━━┻━━━━━━━━┛");
 			System.out.print("동작을 입력하세요 >> ");
 			int menu;
+			// parseInt 예외처리.
 			try {
 				menu = Integer.parseInt(scn.nextLine());
 			} catch (NumberFormatException e) {
@@ -37,12 +39,14 @@ public class EmpApp {
 				String empDate = scn.nextLine();
 				System.out.print("급여 입력 >> ");
 				int salary = 0;
+				// parseInt 예외처리.
 				try {
 					salary = Integer.parseInt(scn.nextLine());
 				} catch (NumberFormatException e) {
 					System.out.println("올바른 급여를 입력하세요");
 					continue;
 				}
+				// ExeDAO의 추가 함수 호출.
 				boolean check = dao.addEmployee(empNo, empName, empTel, empDate, salary);
 				if (check)
 					System.out.println("사원 정보가 등록되었습니다");
@@ -55,6 +59,7 @@ public class EmpApp {
 				System.out.println("< 사원 목록 >");
 				System.out.printf("%3s %3s %5s\n", "사번", "이름", "전화번호");
 				System.out.println("========================");
+				// ExeDAO 목록 출력 함수 호출.
 				dao.getEmployeeList();
 				break;
 
@@ -63,6 +68,7 @@ public class EmpApp {
 				System.out.println("< 급여 수정 >");
 				System.out.print("사번 급여 >> ");
 				String input = scn.nextLine();
+				// ExeDAO 급여 수정 함수 호출.
 				check = dao.modifyEmploy(input);
 				if (check)
 					System.out.println("급여가 수정되었습니다");
@@ -75,6 +81,7 @@ public class EmpApp {
 				System.out.println("< 사원 삭제 >");
 				System.out.print("사번 >> ");
 				input = scn.nextLine();
+				// ExeDAO 사원 삭제 함수 호출.
 				check = dao.removeEmploy(input);
 				if (check)
 					System.out.println("사원 정보가 삭제되었습니다");
@@ -89,6 +96,7 @@ public class EmpApp {
 				input = scn.nextLine();
 				System.out.printf("%3s %3s %5s\n", "사번", "이름", "입사일자");
 				System.out.println("========================");
+				// ExeDAO 사원 조회 함수 호출.
 				dao.getEmployee(input);
 				break;
 
