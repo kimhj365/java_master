@@ -1,4 +1,4 @@
-package todo.p20231205;
+package todo.p20231214;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,8 @@ public class BookApp {
 	public static void main(String[] args) {
 
 		Scanner scn = new Scanner(System.in);
-		BookExe exe = new BookExe();
+//		BookExe exe = new BookExe();
+		BookDAO dao = new BookDAO();
 		boolean run = true;
 		
 		while(run) {
@@ -49,7 +50,7 @@ public class BookApp {
 				}
 				Book book = new Book(bookCode, bookName, author, publisher, bookCost);
 				
-				if(exe.addBook(book)) {
+				if(dao.addBook(book)) {
 					System.out.println("도서 정보가 등록되었습니다");
 				}
 				else {
@@ -63,7 +64,12 @@ public class BookApp {
 				System.out.printf("%7s %10s %10s %11s %10s\n", "도서코드", "도서명", "저자", "출판사", "가격");
 				System.out.println("======================================================================");
 				
-				exe.getBookList();
+				List<Book> books = new ArrayList<>();
+				books =	dao.getBookList();
+				
+				for (int i = 0; i < books.size(); i++) {
+					books.get(i).showInfo();
+				}
 				break;
 				
 			// 3.단건 조회.
@@ -74,7 +80,7 @@ public class BookApp {
 				System.out.printf("%7s %10s %10s %11s %10s\n", "도서코드", "도서명", "저자", "출판사", "가격");
 				System.out.println("======================================================================");
 				
-				Book bk = exe.getBook(bookCode);
+				Book bk = dao.getBook(bookCode);
 				bk.showInfo();
 				break;
 					
@@ -90,7 +96,7 @@ public class BookApp {
 				} catch (Exception e) {
 					System.out.println("올바른 도서 정보를 입력하세요");
 					return;
-				}if (exe.modifyBook(bookCode, bookCost))
+				}if (dao.modifyBook(bookCode, bookCost))
 					System.out.println("도서 정보가 수정되었습니다");
 				else
 					System.out.println("찾는 도서 정보가 없습니다");
@@ -105,7 +111,7 @@ public class BookApp {
 				String yesNo = scn.nextLine();
 				
 				if (yesNo.equals("Y") || yesNo.equals("y")) {
-					if(exe.removeBook(bookCode)) {
+					if(dao.removeBook(bookCode)) {
 					System.out.println("도서 정보가 삭제되었습니다");
 					} 
 					else {

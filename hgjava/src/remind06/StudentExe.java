@@ -32,9 +32,9 @@ public class StudentExe {
 	}
 	
 	// 단건 조회
-	Student showStudent(String num) {
+	Student getStudent(String no) {
 		for(int i = 0; i < students.length; i++) {
-			if(students[i] != null && students[i].getStuNum().equals(num)) {
+			if(students[i] != null && students[i].getStuNum().equals(no)) {
 				return students[i];
 			}
 		}

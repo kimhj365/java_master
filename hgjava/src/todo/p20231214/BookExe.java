@@ -1,14 +1,12 @@
-package todo.p20231205;
+package todo.p20231214;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class BookExe {
 
 	private List<Book> books;
-	Scanner scn = new Scanner(System.in);
-
+	
 
 	BookExe() {
 		books = new ArrayList<>();
@@ -19,9 +17,8 @@ public class BookExe {
 
 	// 1. 도서 등록.
 	boolean addBook(Book book) {
-		
 		books.add(book);
-		return true;
+		return true;		
 	}
 
 	// 2. 도서 목록 조회.
@@ -32,17 +29,19 @@ public class BookExe {
 	}
 
 	// 3. 도서 단건 조회
-	Book getBook(String bookCode) {
+	boolean showBook(String bookCode) {
 		for (Book book : books) {
 			if (book.getBookCode().equals(bookCode)) {
-				return book;
+				book.showInfo();
+				return true;
 			}
 		}
-		return null;
+		return false;
 	}
 
 	// 4. 도서 정보 수정.
 	boolean modifyBook(String bookCode, int bookCost) {
+		
 		for (Book book : books) {
 			if (book.getBookCode().equals(bookCode)) {
 				book.setBookCost(bookCost);
@@ -62,5 +61,4 @@ public class BookExe {
 		}
 		return false;
 	}
-
 }
