@@ -1,5 +1,5 @@
 package miniProject;
 
-public class TheaterDAO {
+public class UserDAO {
 
 }
