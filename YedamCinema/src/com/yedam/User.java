@@ -1,4 +1,8 @@
-package miniProject;
+package com.yedam;
+
+import lombok.Data;
+
+@Data
 
 public class User {
 
@@ -26,8 +30,8 @@ public class User {
 	
 	// ¸Þ¼­µå.
 	void showUserInfo() {
-		System.out.println("User [userId=" + userId + ", passwd=" + passwd + 
-				", userName=" + userName + ", userTel=" + userTel + "]"); 
+		System.out.println("User [userId=" + userId + 
+				", userName= " + userName + ", userTel= " + userTel + "]"); 
 	}
 
 }
