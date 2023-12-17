@@ -23,7 +23,6 @@ public class UserDAO {
 	
 	// 1. 로그인.
 	boolean login(String id, String pw) {
-		getConn();
 		String sql = "SELECT	* "//
 				   + "FROM		t_user "//
 				   + "WHERE		user_id = ? "//
@@ -46,7 +45,6 @@ public class UserDAO {
 	
 	// 1-1. 회원 이름 가져오기
 	String getName(String userId) {
-		getConn();
 		String sql = "SELECT * "//
 				   + "FROM   t_user "//
 				   + "WHERE  user_id = ?";
@@ -67,7 +65,6 @@ public class UserDAO {
 	
 	// 2. 회원 가입.
 	boolean signUp(User user) {
-		getConn();
 		String sql = "INSERT INTO t_user(user_id, passwd, user_name, user_tel) "
 				   + "VALUES (?, ?, ?, ?)";
 		try {
