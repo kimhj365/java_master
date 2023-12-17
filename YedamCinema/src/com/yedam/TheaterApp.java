@@ -1,7 +1,6 @@
 package com.yedam;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class TheaterApp {
@@ -11,10 +10,12 @@ public class TheaterApp {
 		// UserDAO, MovieDAO 객체 생성.
 		UserDAO userDao = new UserDAO();
 		MovieDAO movieDao = new MovieDAO();
+		ScheduleDAO scheduleDao = new ScheduleDAO();
 		
 		// Oracle DB 접속.
 		userDao.getConn();
 		movieDao.getConn();
+		scheduleDao.getConn();
 		
 		Scanner scn = new Scanner(System.in);
 		boolean run1 = true;
@@ -56,6 +57,12 @@ public class TheaterApp {
 					// UserDAO 유저 이름 가져오기 함수 호출.
 					String userName = userDao.getName(userId);
 					System.out.println(userName + " 님 환영합니다!");
+					
+					// 관리자 계정일시 관리자 페이지로 바로 넘어감
+					if(userId.equals("sys")) {
+						run2 = false;
+					}
+					
 					run1 = false;
 				}
 				else {
@@ -68,6 +75,18 @@ public class TheaterApp {
 				System.out.println("\n< 회원 가입 >");
 				System.out.print("아이디를 입력하세요 \n>>>> ");
 				userId = scn.nextLine();
+				
+				// 관리자 아이디 생성 방지
+				if(userId.equals("sys")) {
+					System.out.println("생성할 수 없는 아이디입니다");
+					break;
+				}
+				// 중복 아이디 생성 방지
+				if(!userDao.chkUserId(userId)) {
+					System.out.println("이미 존재하는 아이디입니다");
+					break;
+				}
+				
 				System.out.print("비밀번호를 입력하세요 \n>>>> ");
 				passwd = scn.nextLine();
 				System.out.print("비밀번호를 한번 더 입력하세요 \n>>>> ");
@@ -76,6 +95,7 @@ public class TheaterApp {
 				String userName = scn.nextLine();
 				System.out.print("연락처를 입력하세요 \n>>>> ");
 				String userTel = scn.nextLine();
+								
 				
 				// 비밀번호 일치 확인.
 				if(passwd.equals(passwd2)) {
@@ -93,6 +113,8 @@ public class TheaterApp {
 				System.out.println("올바른 동작을 입력하세요");
 			} // end of switch
 		} // end of while(run1)
+		
+		
 		
 		// II. 유저 화면
 		while(run2) {
@@ -118,13 +140,13 @@ public class TheaterApp {
 					System.out.println(" 번호	  영화 이름		   감독                    출연배우"); 
 					System.out.println("----------------------------------------------------------------------------------");
 					// MovieDAO 페이징 된 영화목록 출력 함수.
-					movieDao.showAllMovie(page);
+					movieDao.showMovieList(page);
 					System.out.println("----------------------------------------------------------------------------------");
 					System.out.printf("[현재 페이지: %d]  ", page);
 					
 					// 전체 페이지 수 출력.
 					// MovieDAO 전체 영화 목록 가져오기 함수 => 영화 수 count.
-					int count = movieDao.getAllMovie().size();
+					int count = movieDao.getMovieList().size();
 					// 전체 영화 수 / 5 + 소수 자릿수 올림 => 전체 페이지 수.
 					int totalPage = (int) Math.ceil(count / 5.0);
 					for (int i = 1; i <= totalPage; i++) {
@@ -245,11 +267,11 @@ public class TheaterApp {
 					System.out.println(" 번호	  영화 이름		   감독                    출연배우"); 
 					System.out.println("----------------------------------------------------------------------------------");
 					// MovidDAO 예매 가능한 영화조회 함수(오늘 날짜 기준)/
-					movieDao.showAvailableMovie(page);
+					movieDao.showMovieList(page);
 					System.out.println("----------------------------------------------------------------------------------");
 					System.out.printf("[현재 페이지: %d]  ", page);
 					
-					int count = movieDao.getAvailableMovie().size();
+					int count = movieDao.getMovieList().size();
 					int totalPage = (int) Math.ceil(count / 5.0);
 					for (int i = 1; i <= totalPage; i++) {
 						System.out.print(i + " ");
@@ -283,27 +305,21 @@ public class TheaterApp {
 					// 3-3. 예매하기
 					case 3:	
 						System.out.println("\n< 영화 예매 하기 >");
+						
 						// 3-3-1. 날짜 선택
 						System.out.print("예매할 날짜를 입력하세요 (YYYY-MM-DD) \n>>>> ");
 						String strDate = scn.nextLine();
-						
-						// String => Date 날짜 포맷
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-						Date date = new Date();
-						try {
-							date = sdf.parse(strDate);
-							System.out.println(strDate);
-						} catch (ParseException e) {
-							System.out.println("올바른 날짜를 입력하세요");
-							break;
-						}
 						
 						// 3-3-2. 영화 선택
 						System.out.print("예매할 영화 번호를 입력하세요 \n>>>> ");
 						String movieNumber = scn.nextLine();
 						
 						
-						List<Movie> movies2 = movieDao.getAvailableMovie();
+						List<Movie> movies2 = movieDao.getMovieList();
+						
+						System.out.println("\n< 상영 시간표 >");
+						System.out.println("  번호	  영화 이름	  	  상영 시간        남은 좌석      할인"); 
+						System.out.println("----------------------------------------------------------------------------------");
 						
 						boolean chk = false;
 						for(Movie movie : movies2){
@@ -315,8 +331,49 @@ public class TheaterApp {
 							System.out.println("올바른 영화 번호를 입력하세요");
 							break;
 						}
-						List<String[]> schedule = movieDao.searchSchedule(movieNumber);
-						movieDao.getSchedule(schedule);
+						List<Schedule> schedules = scheduleDao.getScheduleList(movieNumber, strDate);
+						scheduleDao.showScheduleList(schedules, page);
+						
+						System.out.println("----------------------------------------------------------------------------------");
+						System.out.printf("[현재 페이지: %d]  ", page);
+						
+						// 전체 페이지 수 출력.
+						// MovieDAO 전체 영화 목록 가져오기 함수 => 영화 수 count.
+						count = scheduleDao.getScheduleList(movieNumber, strDate).size();
+						// 전체 영화 수 / 5 + 소수 자릿수 올림 => 전체 페이지 수.
+						totalPage = (int) Math.ceil(count / 5.0);
+						for (int i = 1; i <= totalPage; i++) {
+							System.out.print(i + " ");
+						}
+						
+						System.out.println();
+						System.out.println("┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓");
+						System.out.println("┃ 1.이전 페이지 ┃ 2. 다음페이지 ┃ 3. 상영 시간 선택 ┃ 4. 나가기 ┃");
+						System.out.println("┗━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━━━━┻━━━━━━━━━━━┛");
+						System.out.print("동작을 입력하세요 \n>>>> ");
+						try {
+							subMenu = Integer.parseInt(scn.nextLine());
+						} catch (Exception e) {
+							subMenu = 0;
+						}
+						
+						switch(subMenu) {
+						// 3-1. 이전 페이지.
+						case 1: 
+							if(page > 1) {
+								page--;
+							}
+							break;
+						// 3-2. 다음 페이지.
+						case 2:
+							if(page < totalPage) {
+								page++;
+							}
+							break;
+						case 3:	
+						}
+						System.out.print("\n예매할 상영 시간을 입력하세요 \n>>>> ");
+						String schedule = scn.nextLine();
 						
 						break;
 						

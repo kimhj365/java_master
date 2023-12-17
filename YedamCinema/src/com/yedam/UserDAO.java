@@ -84,6 +84,25 @@ public class UserDAO {
 		return false;		
 	}
 	
+	// 2-1. 중복 아이디 가입 방지
+	boolean chkUserId(String userId) {
+		String sql = "SELECT * "
+				   + "FROM   t_user "
+				   + "WHERE  user_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, userId);
+			
+			int r = psmt.executeUpdate(); // 처리된 건수 반환 => 한 건 처리시 1
+			if(r == 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;		
+	}
+	
 	
 	
 }
