@@ -5,20 +5,24 @@ import java.util.*;
 public class TheaterApp {
 
 	public static void main(String[] args) {
-
+		
 		Scanner scn = new Scanner(System.in);
 		UserDAO userDao = new UserDAO();
 		MovieDAO movieDao = new MovieDAO();
+		movieDao.getConn();
+		
+		
 		boolean run1 = true;
 		boolean run2 = true;
-		
+		System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+		System.out.println("¦­ ¡Ú                                                                 ¡Ú ¦­");
+		System.out.println("¦­                         ¿¹´ã½Ã³×¸¶ µ¿¼º·ÎÁ¡                         ¦­");
+		System.out.println("¦­ ¡Ú                                                                 ¡Ú ¦­");
+		System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 		
 		// ½ÃÀÛÈ­¸é.
 		while(run1) {
 			System.out.println();
-			System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-			System.out.println("¦­                         ¿¹´ã½Ã³×¸¶ µ¿¼º·ÎÁ¡                         ¦­");
-			System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 			System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
 			System.out.println("¦­            1. ·Î±×ÀÎ              ¦­            2.È¸¿ø°¡ÀÔ           ¦­");
 			System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
@@ -33,7 +37,7 @@ public class TheaterApp {
 			// 1. ·Î±×ÀÎ.
 			switch(menu) {
 			case 1:
-				System.out.println("< ·Î±×ÀÎ >");
+				System.out.println("\n< ·Î±×ÀÎ >");
 				System.out.print("¾ÆÀÌµð¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 				String userId = scn.nextLine();
 				System.out.print("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
@@ -52,7 +56,7 @@ public class TheaterApp {
 			
 			// 2. È¸¿ø°¡ÀÔ.
 			case 2 :
-				System.out.println("< È¸¿ø °¡ÀÔ >");
+				System.out.println("\n< È¸¿ø °¡ÀÔ >");
 				System.out.print("¾ÆÀÌµð¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 				userId = scn.nextLine();
 				System.out.print("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
@@ -95,51 +99,71 @@ public class TheaterApp {
 			switch(menu) {
 			// 1. ÀüÃ¼ ¿µÈ­ ¸ñ·Ï Á¶È¸
 			case 1:
-				System.out.println("< ¿µÈ­ ¸ñ·Ï >");
-				System.out.println(" ¹øÈ£	  ¿µÈ­ ÀÌ¸§		   °¨µ¶                    Ãâ¿¬¹è¿ì"); 
-				System.out.println("----------------------------------------------------------------------------------");
-				List<Movie> movies = new ArrayList<>();
-				movies = movieDao.getMovieList();
-				
-				for (int i = 0; i < movies.size(); i++) {
-					movies.get(i).showMovieInfo();
-				}
-				System.out.println("----------------------------------------------------------------------------------");
-
-				System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-				System.out.println("¦­ 1.¿µÈ­ Á¤º¸ º¸±â ¦­ 2. ³ª°¡±â ¦­");
-				System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
-				System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
-				int subMenu;
-				try {
-					subMenu = Integer.parseInt(scn.nextLine());
-				} catch (Exception e) {
-					subMenu = 0;
-				}
-				
-				switch(subMenu) {
-				case 1: 
-					System.out.println("< ¿µÈ­ Á¤º¸ º¸±â >");
-					System.out.print("¿µÈ­ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
-					String movieNumber = scn.nextLine();
-					Movie movie = movieDao.getMovie(movieNumber);
-					try {
-						movie.showMovieDetailInfo();
-					} catch (NullPointerException e) {
-						System.out.println("¿Ã¹Ù¸¥ ¿µÈ­ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+				boolean run3 = true;
+				int page = 1;
+				while(run3){
+					System.out.println("\n< ¿µÈ­ ¸ñ·Ï >");
+					System.out.println(" ¹øÈ£	  ¿µÈ­ ÀÌ¸§		   °¨µ¶                    Ãâ¿¬¹è¿ì"); 
+					System.out.println("----------------------------------------------------------------------------------");
+					movieDao.showAllMovieList(page);
+					System.out.println("----------------------------------------------------------------------------------");
+					
+					int count = movieDao.getAllMovieList().size();
+					int totalPage = (int) Math.ceil(count / 5.0);
+					System.out.printf("[ÇöÀç ÆäÀÌÁö: %d]  ", page);
+					for (int i = 1; i <= totalPage; i++) {
+						System.out.print(i + " ");
 					}
-					break;
-				case 2:
-					break;
-				default :
-					break;
+					
+					System.out.println();
+					System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+					System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ÆäÀÌÁö ¦­ 3. ¿µÈ­ Á¤º¸ º¸±â ¦­ 4. ³ª°¡±â ¦­");
+					System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+					System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+					int subMenu;
+					try {
+						subMenu = Integer.parseInt(scn.nextLine());
+					} catch (Exception e) {
+						subMenu = 0;
+					}
+					
+					switch(subMenu) {
+					case 1: 
+						if(page > 1) {
+							page--;
+						}
+						break;
+					case 2:
+						if(page < totalPage) {
+							page++;
+						}
+						break;
+					case 3:	
+						System.out.println("\n< ¿µÈ­ Á¤º¸ º¸±â >");
+						System.out.print("¿µÈ­ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+						String movieNumber = scn.nextLine();
+						Movie movie = movieDao.getMovie(movieNumber);
+						try {
+							movie.showMovieDetailInfo();
+						} catch (NullPointerException e) {
+							System.out.println("¿Ã¹Ù¸¥ ¿µÈ­ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+						}
+						break;
+					case 4:
+						run3 = false;
+						break;
+					default :
+						break;
+					}
+					
 				}
+				
 				
 				break;
 				
-			// 2. ¿µÈ­ ´Ü°Ç Á¶È¸
+			// 2. ¿µÈ­ °Ë»ö
 			case 2:
-				System.out.println("< ¿µÈ­ ´Ü°Ç Á¶È¸ >");
+				System.out.println("\n< ¿µÈ­ °Ë»ö >");
 				System.out.print("°Ë»ö¾î¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 				String search = scn.nextLine();
 				
@@ -157,6 +181,8 @@ public class TheaterApp {
 				System.out.println("¦­ 1.¿µÈ­ Á¤º¸ º¸±â ¦­ 2. ³ª°¡±â ¦­");
 				System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 				System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+				
+				int subMenu;
 				try {
 					subMenu = Integer.parseInt(scn.nextLine());
 				} catch (Exception e) {
@@ -165,7 +191,7 @@ public class TheaterApp {
 				
 				switch(subMenu) {
 				case 1: 
-					System.out.println("< ¿µÈ­ Á¤º¸ º¸±â >");
+					System.out.println("\n< ¿µÈ­ Á¤º¸ º¸±â >");
 					System.out.print("¿µÈ­ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 					String movieNumber = scn.nextLine();
 					Movie movie = movieDao.getMovie(movieNumber);
@@ -185,12 +211,76 @@ public class TheaterApp {
 			
 			// ¿µÈ­ ¿¹¸Å.
 			case 3:
-				System.out.println("< ¿µÈ­ ¿¹¸Å >");
+				boolean run4 = true;
+				page = 1;
+				while(run4){
+					System.out.println("\n< ¿µÈ­ ¸ñ·Ï >");
+					System.out.println(" ¹øÈ£	  ¿µÈ­ ÀÌ¸§		   °¨µ¶                    Ãâ¿¬¹è¿ì"); 
+					System.out.println("----------------------------------------------------------------------------------");
+					movieDao.showAvailableMovieList(page);
+					System.out.println("----------------------------------------------------------------------------------");
+					
+					int count = movieDao.getAvailableMovieList().size();
+					int totalPage = (int) Math.ceil(count / 5.0);
+					System.out.printf("[ÇöÀç ÆäÀÌÁö: %d]  ", page);
+					for (int i = 1; i <= totalPage; i++) {
+						System.out.print(i + " ");
+					}
+					
+					System.out.println();
+					System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+					System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ÆäÀÌÁö ¦­ 3. ¿µÈ­ ¿¹¸Å ÇÏ±â ¦­ 4. ³ª°¡±â ¦­");
+					System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+					System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+					try {
+						subMenu = Integer.parseInt(scn.nextLine());
+					} catch (Exception e) {
+						subMenu = 0;
+					}
+					
+					switch(subMenu) {
+					case 1: 
+						if(page > 1) {
+							page--;
+						}
+						break;
+					case 2:
+						if(page < totalPage) {
+							page++;
+						}
+						break;
+					case 3:	
+						System.out.println("\n< ¿µÈ­ ¿¹¸Å ÇÏ±â >");
+						System.out.print("¿¹¸ÅÇÒ ¿µÈ­ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+						String movieNumber = scn.nextLine();
+						List<Movie> movies = movieDao.getAvailableMovieList();
+						
+						boolean chk = false;
+						for(Movie movie : movies){
+							if(movie.getMovieNumber().equals(movieNumber)) {
+								chk = true;
+							}
+						}
+						if(!chk) {
+							System.out.println("¿Ã¹Ù¸¥ ¿µÈ­ ¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä");
+							break;
+						}
+						List<String[]> schedule = movieDao.searchSchedule(movieNumber);
+						movieDao.getSchedule(schedule);
+						
+						break;
+						
+					case 4:
+						run4 = false;
+						break;
+					default :
+						break;
+					}
+				}
 				
-				
-				break;
 			case 4:
 				break;
+				
 			case 5:
 				System.out.println("·Î±×¾Æ¿ô µÇ¾ú½À´Ï´Ù");
 				scn.close();
