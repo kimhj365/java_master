@@ -21,10 +21,25 @@ public class MovieDAO {
 		}
 		return conn;
 	}
+	
+	// 0-1. DB 연결 해제
+	void disConn() {
+		try {
+			if(conn != null)
+				conn.close();
+			if(rs != null)
+				rs.close();
+			if(psmt != null)
+				psmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 	// 1. 영화 조회
 	List<Movie> getMovieList() {
 		List<Movie> movies = new ArrayList<>();
+		getConn();
 		String sql = "SELECT	* "//
 				+ "FROM		movie "//
 				+ "ORDER BY 	1";
@@ -48,6 +63,8 @@ public class MovieDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disConn();
 		}
 		return movies;
 	}
@@ -80,6 +97,7 @@ public class MovieDAO {
 
 	// 2. 영화 상세정보 조회
 	Movie getMovieDetail(String movieNumber) {
+		getConn();
 		String sql = ("SELECT * "//
 				+ "FROM   movie "//
 				+ "WHERE  movie_id = ?");
@@ -104,12 +122,15 @@ public class MovieDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			disConn();
 		}
 		return null;
 	}
 
 	// 3. 영화 검색
 	List<Movie> searchMovie(String search) {
+		getConn();
 		List<Movie> movies = new ArrayList<>();
 		// 영화 이름, 출연 배우 이름, 감독 이름으로 검색 쿼리.
 		String sql = "SELECT * "//
@@ -140,6 +161,8 @@ public class MovieDAO {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			disConn();
 		}
 		return movies;
 	}

@@ -1,7 +1,5 @@
 package com.yedam;
 
-import java.util.ArrayList;
-
 import lombok.Data;
 
 @Data

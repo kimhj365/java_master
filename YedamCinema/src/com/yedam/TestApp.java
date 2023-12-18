@@ -48,6 +48,7 @@ public class TestApp {
 		DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		LocalDate ldDate = LocalDate.parse(strDate, formatter2);
 		System.out.println("LocalDate ldDate = " + ldDate);
+		
 	}
 
 }
