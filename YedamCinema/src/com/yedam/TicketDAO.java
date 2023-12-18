@@ -103,7 +103,7 @@ public class TicketDAO {
 			rs = psmt.executeQuery();
 
 			while (rs.next()) {
-				System.out.printf("%3s %15s %20s %5s %2s %2d %20s\n", //
+				System.out.printf("%3s %-15s %20s %7s %4s %-2d %20s\n", //
 						rs.getString("ticket_id"), rs.getString("movie_name"), rs.getString("str_date"), //
 						rs.getString("age"), rs.getString("seat_row"), //
 						rs.getInt("seat_column"), rs.getString("rsv_date"));
@@ -139,7 +139,7 @@ public class TicketDAO {
 		return false;
 	}
 	
-	int getScheduleId(int modNum) {
+	int getScheduleId(int ticketId) {
 		getConn();
 		String sql = "SELECT  t.ticket_id, s.schedule_id "
 				   + "FROM    ticket t, schedule s "
@@ -148,7 +148,7 @@ public class TicketDAO {
 		
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, modNum);
+			psmt.setInt(1, ticketId);
 
 			rs = psmt.executeQuery();
 			if(rs.next()) {
@@ -164,7 +164,7 @@ public class TicketDAO {
 	}
 
 	// 4. 예매 여부 확인
-	boolean checkTicket(String userId, int delNum) {
+	boolean checkTicket(String userId, int ticketId) {
 		getConn();
 		String sql = "SELECT   * "
 				   + "FROM    ticket "
@@ -173,7 +173,7 @@ public class TicketDAO {
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, userId);
-			psmt.setInt(2, delNum);
+			psmt.setInt(2, ticketId);
 
 			rs = psmt.executeQuery();
 			if (rs.next()) {
@@ -185,6 +185,28 @@ public class TicketDAO {
 			disConn();
 		}
 		return false;
+	}
+	
+	// 5. 예매 취소
+	boolean deleteTicket(int ticketId) {
+		getConn();
+		String sql = "DELETE  ticket "
+				   + "WHERE   ticket_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, ticketId);
+
+			int r = psmt.executeUpdate();
+			if (r > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return false;
+		
 	}
 
 }

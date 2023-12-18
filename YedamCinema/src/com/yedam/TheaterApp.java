@@ -19,6 +19,7 @@ public class TheaterApp {
 		Scanner scn = new Scanner(System.in);
 		boolean run1 = true;
 		boolean run2 = true;
+		boolean run3 = true;
 		String userId = "";
 
 		// 0. 시작 타이틀.
@@ -128,9 +129,9 @@ public class TheaterApp {
 			switch (menu) {
 			// 1 전체 영화 목록 조회.
 			case 1:
-				boolean run3 = true;
+				boolean run4 = true;
 				int page = 1;
-				while (run3) {
+				while (run4) {
 					System.out.println("\n< 영화 목록 >");
 					System.out.println(" 번호	  영화 이름		   감독                    출연배우");
 					System.out.println(
@@ -192,7 +193,7 @@ public class TheaterApp {
 						break;
 					// 1-4. 나가기
 					case 4:
-						run3 = false;
+						run4 = false;
 						break;
 					default:
 						break;
@@ -258,9 +259,9 @@ public class TheaterApp {
 
 			// 3. 영화 예매.
 			case 3:
-				boolean run4 = true;
+				boolean run5 = true;
 				page = 1;
-				while (run4) {
+				while (run5) {
 					System.out.println("\n< 영화 목록 >");
 					System.out.println(" 번호	  영화 이름		   감독                    출연배우");
 					System.out.println(
@@ -341,8 +342,8 @@ public class TheaterApp {
 						}
 
 						// 상영 시간표 출력
-						boolean run5 = true;
-						while (run5) {
+						boolean run6 = true;
+						while (run6) {
 							List<Schedule> schedules = scheduleDao.getScheduleList(movieNumber, strDate);
 							for (int i = 0; i < schedules.size(); i++) {
 								scheduleDao.updateSeats(schedules.get(i).getScheduleId());
@@ -420,7 +421,7 @@ public class TheaterApp {
 									break;
 								}
 
-								String row;
+								char rowChar;
 								int column = 0;
 								for (int i = 0; i < adult; i++) {
 									scheduleDao.showSeats();
@@ -428,14 +429,26 @@ public class TheaterApp {
 									System.out.println("예매할 좌석을 선택하세요(성인)");
 									try {
 										System.out.print("\n행을 입력하세요(A~E) \n>>>> ");
-										row = scn.nextLine().toUpperCase();
+										rowChar = scn.nextLine().toUpperCase().charAt(0);
+										if (rowChar < 65 || rowChar > 69) {
+											System.out.println("올바른 좌석 번호를 입력하세요");
+											break;
+										}
+
 										System.out.print("\n열을 입력하세요(1~10) \n>>>> ");
 										column = Integer.parseInt(scn.nextLine());
+
+										if (column < 1 || column > 10) {
+											System.out.println("올바른 좌석 번호를 입력하세요");
+											break;
+										}
+
 									} catch (Exception e) {
 										System.out.println("올바른 좌석 번호를 입력하세요");
 										break;
 									}
 
+									String row = String.valueOf(rowChar);
 									Ticket ticket = new Ticket(userId, scheduleId, "성인", row, column, discount);
 
 									System.out.println(ticket.reserveDate);
@@ -462,13 +475,26 @@ public class TheaterApp {
 									System.out.println("예매할 좌석을 선택하세요(청소년)");
 									try {
 										System.out.print("\n행을 입력하세요(A~E) \n>>>> ");
-										row = scn.nextLine().toUpperCase();
+										rowChar = scn.nextLine().toUpperCase().charAt(0);
+										if (rowChar < 65 || rowChar > 69) {
+											System.out.println("올바른 좌석 번호를 입력하세요");
+											break;
+										}
+
 										System.out.print("\n열을 입력하세요(1~10) \n>>>> ");
 										column = Integer.parseInt(scn.nextLine());
+
+										if (column < 1 || column > 10) {
+											System.out.println("올바른 좌석 번호를 입력하세요");
+											break;
+										}
+
 									} catch (Exception e) {
 										System.out.println("올바른 좌석 번호를 입력하세요");
 										break;
 									}
+
+									String row = String.valueOf(rowChar);
 									Ticket ticket = new Ticket(userId, scheduleId, "청소년", row, column, discount);
 									if (ticketDao.isOccupied(row, column)) {
 										System.out.println("이미 예매된 좌석입니다\n");
@@ -489,14 +515,14 @@ public class TheaterApp {
 
 								break;
 							case 4:
-								run5 = false;
+								run6 = false;
 								break;
 							default:
 								break;
 							}
 						} // end of while(run5)
 					case 4:
-						run4 = false;
+						run5 = false;
 						break;
 					default:
 						break;
@@ -504,10 +530,10 @@ public class TheaterApp {
 					}
 				} // end of while(run4)
 
-				// 4. 마이페이지
+			// 4. 마이페이지
 			case 4:
-				boolean run6 = true;
-				while (run6) {
+				boolean run7 = true;
+				while (run7) {
 					System.out.println();
 					System.out.println("┏━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━━━┓");
 					System.out.println("┃ 1.예매 확인 ┃ 2. 좌석 변경 ┃ 3. 예매 취소 ┃ 4. 나가기 ┃");
@@ -523,7 +549,7 @@ public class TheaterApp {
 					// 4-1. 예매 확인
 					case 1:
 						System.out.println("\n< 예매 확인 >");
-						System.out.println("  번호	  영화이름	  	  상영날짜      연령     좌석	    예매날짜");
+						System.out.println("번호	  영화이름	  	 상영날짜         연령   좌석	    예매날짜");
 						System.out.println(
 								"----------------------------------------------------------------------------------");
 						ticketDao.showTicket(userId);
@@ -533,7 +559,7 @@ public class TheaterApp {
 					// 4-2. 좌석 변경
 					case 2:
 						System.out.println("\n< 좌석 변경 >");
-						System.out.println("  번호	  영화이름	  	  상영날짜      연령     좌석	    예매날짜");
+						System.out.println("번호	  영화이름	  	 상영날짜         연령   좌석	    예매날짜");
 						System.out.println(
 								"----------------------------------------------------------------------------------");
 						ticketDao.showTicket(userId);
@@ -546,46 +572,82 @@ public class TheaterApp {
 						} catch (Exception e) {
 							modNum = 0;
 						}
-						if(!ticketDao.checkTicket(userId, modNum)) {
-							System.out.println("예약번호가 없습니다");
+						if (!ticketDao.checkTicket(userId, modNum)) {
+							System.out.println("예매 번호가 없습니다");
 							break;
-						}
-						else {
+						} else {
 							ticketDao.getScheduleId(modNum);
-							
-							String row;
-							int column = 0;
-								scheduleDao.showSeats();
 
-								System.out.println("변경할 좌석을 선택하세요");
-								try {
-									System.out.print("\n행을 입력하세요(A~E) \n>>>> ");
-									row = scn.nextLine().toUpperCase();
-									System.out.print("\n열을 입력하세요(1~10) \n>>>> ");
-									column = Integer.parseInt(scn.nextLine());
-								} catch (Exception e) {
+							char rowChar;
+							int column = 0;
+							scheduleDao.showSeats();
+
+							System.out.println("변경할 좌석을 선택하세요");
+							try {
+								System.out.print("\n행을 입력하세요(A~E) \n>>>> ");
+								rowChar = scn.nextLine().toUpperCase().charAt(0);
+								if (rowChar < 65 || rowChar > 69) {
 									System.out.println("올바른 좌석 번호를 입력하세요");
 									break;
 								}
 
+								System.out.print("\n열을 입력하세요(1~10) \n>>>> ");
+								column = Integer.parseInt(scn.nextLine());
 
-								if (ticketDao.isOccupied(row, column)) {
-									System.out.println("이미 예매된 좌석입니다\n");
+								if (column < 1 || column > 10) {
+									System.out.println("올바른 좌석 번호를 입력하세요");
 									break;
-								} else {
-									if (ticketDao.modifyTicket(modNum, row, column)) {
-										System.out.println("좌석 변경이 완료되었습니다");
-//										for (int j = 0; j < schedules.size(); j++) {
-//											scheduleDao.updateSeats(schedules.get(i).getScheduleId());
-//										}
-									} else {
-										System.out.println("좌석 변경에 실패했습니다");
-									}
 								}
+
+							} catch (Exception e) {
+								System.out.println("올바른 좌석 번호를 입력하세요");
+								break;
+							}
+
+							String row = String.valueOf(rowChar);
+
+							if (ticketDao.isOccupied(row, column)) {
+								System.out.println("이미 예매된 좌석입니다\n");
+								break;
+							} else {
+								if (ticketDao.modifyTicket(modNum, row, column)) {
+									System.out.println("좌석 변경이 완료되었습니다");
+								} else {
+									System.out.println("좌석 변경에 실패했습니다");
+								}
+							}
+						}
+					// 예매 취소
+					case 3:
+						System.out.println("\n< 좌석 변경 >");
+						System.out.println("번호	  영화이름	  	 상영날짜         연령   좌석	    예매날짜");
+						System.out.println(
+								"----------------------------------------------------------------------------------");
+						ticketDao.showTicket(userId);
+						System.out.println(
+								"----------------------------------------------------------------------------------");
+						System.out.print("좌석을 변경할 예매 번호를 입력하세요 \n>>>> ");
+						int delNum;
+						try {
+							delNum = Integer.parseInt(scn.nextLine());
+						} catch (Exception e) {
+							delNum = 0;
+						}
+						if (!ticketDao.checkTicket(userId, delNum)) {
+							System.out.println("예매 번호가 없습니다");
+							break;
+						}  else {
+							if(ticketDao.deleteTicket(delNum)) {
+								System.out.println("예매 취소가 완료되었습니다");
+							} else {
+								System.out.println("예매 취소에 실패했습니다");
+								break;
+							}
 						}
 						
-					case 3:
-						run6 = false;
+						break;
+					case 4:
+						run7 = false;
 						break;
 					default:
 						break;
@@ -602,6 +664,12 @@ public class TheaterApp {
 			} // end of switch
 
 		} // end of while(run2)
+		
+		// III. 관리자 화면.
+		while(run3) {
+			System.out.println("관리자 화면입니다");
+			break;
+		}
 		System.out.println("end of prog.");
 	}
 

@@ -49,6 +49,10 @@ public class TestApp {
 		LocalDate ldDate = LocalDate.parse(strDate, formatter2);
 		System.out.println("LocalDate ldDate = " + ldDate);
 		
+		
+		char a = 65;
+		char e = 69;
+		System.out.println(a + ", " + e);
 	}
 
 }
