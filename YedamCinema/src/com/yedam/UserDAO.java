@@ -1,6 +1,8 @@
 package com.yedam;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAO {
 
@@ -110,13 +112,15 @@ public class UserDAO {
 	// 2-1. 중복 아이디 가입 방지
 	boolean chkUserId(String userId) {
 		getConn();
-		String sql = "SELECT * " + "FROM   t_user " + "WHERE  user_id = ?";
+		String sql = "SELECT * "//
+				+ "FROM   t_user "//
+				+ "WHERE  user_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, userId);
 
-			int r = psmt.executeUpdate(); // 처리된 건수 반환 => 한 건 처리시 1
-			if (r == 0) {
+			rs = psmt.executeQuery();
+			if (rs.next()) {
 				return true;
 			}
 		} catch (SQLException e) {
@@ -126,5 +130,69 @@ public class UserDAO {
 		}
 		return false;
 	}
+	
+	// 유저 정보 가져오기
+	List<User> getUserList() {
+		getConn();
+		List<User> users = new ArrayList<>();
+		String sql = "SELECT * "//
+				+ "FROM   t_user "//
+				+ "ORDER BY 1";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				User user = new User(getSequence(users),rs.getString("user_id"), rs.getString("passwd"), rs.getString("user_name"),
+						rs.getString("user_tel"), rs.getString("join_date"));
+				users.add(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return users;
+	}
+
+	// 페이징
+	public static List<User> paging(List<User> userList, int page) {
+		List<User> resultList = new ArrayList<>();
+
+		int start = (page - 1) * 5; // 0 부터 시작
+		int end = page * 5; // 5 전까지 (5개)
+
+		for (int i = 0; i < userList.size(); i++) {
+			if (i >= start && i < end) {
+				resultList.add(userList.get(i));
+			}
+		}
+		return resultList;
+	}
+
+	// 예매내역 페이징해서 출력
+	public void showUserList(List<User> searchTicket, int page) {
+		List<User> pagedTicketList = paging(searchTicket, page);
+
+		for (User user : pagedTicketList) {
+			user.showUserInfo();
+		}
+	}
+
+	// 번호 자동 매기기
+	public static int getSequence(List<User> users) {
+		int seqNum = 1;
+		int maxNum = 0; // 최대 번호 값 저장
+
+		for (User user : users) {
+			if (user.getNum() > maxNum) {
+				maxNum = user.getNum();
+			}
+		}
+		seqNum = maxNum + 1;
+		return seqNum;
+	}
+
 
 }

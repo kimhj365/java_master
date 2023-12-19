@@ -50,9 +50,18 @@ public class TestApp {
 		System.out.println("LocalDate ldDate = " + ldDate);
 		
 		
-		char a = 65;
-		char e = 69;
-		System.out.println(a + ", " + e);
+		char A = 65;
+		char E = 69;
+		System.out.println(A + ", " + E);
+		
+		String movieDate = "2023-12-20 12:00";
+		DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+		LocalDateTime ldt;
+		try {
+			ldt = LocalDateTime.parse(movieDate, formatter3);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

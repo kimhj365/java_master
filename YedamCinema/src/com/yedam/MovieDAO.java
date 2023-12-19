@@ -21,15 +21,15 @@ public class MovieDAO {
 		}
 		return conn;
 	}
-	
+
 	// 0-1. DB 연결 해제
 	void disConn() {
 		try {
-			if(conn != null)
+			if (conn != null)
 				conn.close();
-			if(rs != null)
+			if (rs != null)
 				rs.close();
-			if(psmt != null)
+			if (psmt != null)
 				psmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -128,7 +128,7 @@ public class MovieDAO {
 		return null;
 	}
 
-	// 3. 영화 검색
+	// 3. 영화 검색.
 	List<Movie> searchMovie(String search) {
 		getConn();
 		List<Movie> movies = new ArrayList<>();
@@ -167,5 +167,92 @@ public class MovieDAO {
 		return movies;
 	}
 
-	
+	// 4. 영화 추가.
+	boolean addMovie(Movie movie) {
+		getConn();
+		String sql = "INSERT INTO movie " + "VALUES (?,?,?,?,?,TO_DATE(?, 'YYYY-MM-DD'),?,?,?)";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, movie.getMovieNumber());
+			psmt.setString(2, movie.getMovieName());
+			psmt.setString(3, movie.getDirector());
+			psmt.setString(4, movie.getGenre());
+			psmt.setString(5, movie.getActors());
+			psmt.setString(6, movie.getReleaseDate());
+			psmt.setInt(7, movie.getAgeLimit());
+			psmt.setInt(8, movie.getRunningTime());
+			psmt.setString(9, movie.getPlot());
+
+			int r = psmt.executeUpdate();
+			if (r > 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return false;
+	}
+
+	// 5. 영화 중복 검사
+	boolean chkMovie(String movieId) {
+		getConn();
+		String sql = "SELECT	* " + "FROM		movie " + "WHERE 	movie_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, movieId);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return false;
+	}
+
+	String getMovieName(String movieId) {
+		getConn();
+		String sql = "SELECT	* " + "FROM		movie " + "WHERE 	movie_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, movieId);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				return rs.getString("movie_name");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return null;
+	}
+
+	boolean deleteMovie(String movieNum) {
+		getConn();
+		String sql = "DELETE movie "
+					+ "WHERE movie_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, movieNum);
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return false;
+	}
+
 }

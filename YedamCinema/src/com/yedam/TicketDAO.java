@@ -1,6 +1,8 @@
 package com.yedam;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TicketDAO {
 
@@ -38,7 +40,8 @@ public class TicketDAO {
 	// 1. 티켓 생성
 	boolean reserveTicket(Ticket ticket) {
 		getConn();
-		String sql = "INSERT INTO  ticket " + "VALUES      (ticket_id_seq.NEXTVAL,?,?,?,?,?,?,?,"
+		String sql = "INSERT INTO  ticket "//
+				+ "VALUES      (ticket_id_seq.NEXTVAL,?,?,?,?,?,?,?,"//
 				+ "TO_DATE(?, 'YYYY-MM-DD HH24:MI:SS'))";
 
 		try {
@@ -68,7 +71,10 @@ public class TicketDAO {
 	// 1-1. 빈자리 찾기
 	boolean isOccupied(String row, int column) {
 		getConn();
-		String sql = "SELECT  * " + "FROM    ticket " + "WHERE   seat_row = ? " + "AND     seat_column = ?";
+		String sql = "SELECT  * "//
+				+ "FROM    ticket "//
+				+ "WHERE   seat_row = ? "//
+				+ "AND     seat_column = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, row);
@@ -115,12 +121,79 @@ public class TicketDAO {
 		}
 	}
 
+	// 전체 예매 내역 가져오기
+	List<Ticket> getTicketList(String date) {
+		getConn();
+		List<Ticket> tickets = new ArrayList<>();
+		String sql = "SELECT  ticket_id, user_id, schedule_id, "//
+				+ "			  age, seat_row, seat_column, discount, price, reserve_date " //
+				+ "FROM    ticket "//
+				+ "WHERE   TO_CHAR(reserve_date, 'yyyy-MM-dd') = ? " + "ORDER BY 1";
+
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, date);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				Ticket ticket = new Ticket(getSequence(tickets), rs.getInt("ticket_id"), rs.getString("user_id"),
+						rs.getInt("schedule_id"), rs.getString("age"), rs.getString("seat_row"),
+						rs.getInt("seat_column"), rs.getString("discount"), rs.getInt("price"),
+						rs.getString("reserve_date"));
+				tickets.add(ticket);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return tickets;
+	}
+
+	// 페이징
+	public static List<Ticket> paging(List<Ticket> ticketList, int page) {
+		List<Ticket> resultList = new ArrayList<>();
+
+		int start = (page - 1) * 5; // 0 부터 시작
+		int end = page * 5; // 5 전까지 (5개)
+
+		for (int i = 0; i < ticketList.size(); i++) {
+			if (i >= start && i < end) {
+				resultList.add(ticketList.get(i));
+			}
+		}
+		return resultList;
+	}
+
+	// 예매내역 페이징해서 출력
+	public void showScheduleList(List<Ticket> searchTicket, int page) {
+		List<Ticket> pagedTicketList = paging(searchTicket, page);
+
+		for (Ticket ticket : pagedTicketList) {
+			ticket.showInfo();
+		}
+	}
+
+	// 번호 자동 매기기
+	public static int getSequence(List<Ticket> schedules) {
+		int seqNum = 1;
+		int maxNum = 0; // 최대 번호 값 저장
+
+		for (Ticket schdl : schedules) {
+			if (schdl.getNum() > maxNum) {
+				maxNum = schdl.getNum();
+			}
+		}
+		seqNum = maxNum + 1;
+		return seqNum;
+	}
+
 	// 3. 좌석 변경
 	boolean modifyTicket(int ticketId, String row, int column) {
 		getConn();
-		String sql = "UPDATE ticket "
-				   + "SET    seat_row = ?, seat_column = ? "
-				   + "WHERE  ticket_id = ? ";
+		String sql = "UPDATE ticket "//
+				+ "SET    seat_row = ?, seat_column = ? "//
+				+ "WHERE  ticket_id = ? ";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, row);
@@ -138,20 +211,20 @@ public class TicketDAO {
 		}
 		return false;
 	}
-	
+
 	int getScheduleId(int ticketId) {
 		getConn();
-		String sql = "SELECT  t.ticket_id, s.schedule_id "
-				   + "FROM    ticket t, schedule s "
-				   + "WHERE   t.schedule_id = s.schedule_id "
-				   + "AND     t.ticket_id = ?";
-		
+		String sql = "SELECT  t.ticket_id, s.schedule_id "//
+				+ "FROM    ticket t, schedule s "//
+				+ "WHERE   t.schedule_id = s.schedule_id "//
+				+ "AND     t.ticket_id = ?";
+
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, ticketId);
 
 			rs = psmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				return rs.getInt("schedule_id");
 			}
 		} catch (Exception e) {
@@ -160,16 +233,16 @@ public class TicketDAO {
 			disConn();
 		}
 		return 0;
-		
+
 	}
 
 	// 4. 예매 여부 확인
 	boolean checkTicket(String userId, int ticketId) {
 		getConn();
-		String sql = "SELECT   * "
-				   + "FROM    ticket "
-				   + "WHERE   user_id = ? "
-				   + "AND     ticket_id = ?";
+		String sql = "SELECT   * "//
+				+ "FROM    ticket "//
+				+ "WHERE   user_id = ? "//
+				+ "AND     ticket_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, userId);
@@ -186,12 +259,12 @@ public class TicketDAO {
 		}
 		return false;
 	}
-	
+
 	// 5. 예매 취소
 	boolean deleteTicket(int ticketId) {
 		getConn();
-		String sql = "DELETE  ticket "
-				   + "WHERE   ticket_id = ?";
+		String sql = "DELETE  ticket "//
+				+ "WHERE   ticket_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, ticketId);
@@ -206,7 +279,27 @@ public class TicketDAO {
 			disConn();
 		}
 		return false;
-		
+
+	}
+
+	// 오늘 매출 조회
+	void dailySales() {
+		getConn();
+		String sql = "SELECT  COUNT(*) count, SUM(price) sum "
+					+ "FROM    ticket "
+					+ "WHERE   TO_CHAR(reserve_date, 'YYYY-MM-DD') =  TO_CHAR(SYSDATE, 'YYYY-MM-DD')";
+		try {
+			psmt = conn.prepareStatement(sql);
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				System.out.println("오늘의 예매 수 : " + rs.getInt("count"));
+				System.out.println("오늘의 매출    : " + rs.getInt("sum") + "원");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
 	}
 
 }
