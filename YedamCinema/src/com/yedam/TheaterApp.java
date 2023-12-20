@@ -34,9 +34,9 @@ public class TheaterApp {
 			// I. ·Î±×ÀÎ / È¸¿ø°¡ÀÔ.
 			while (run1) {
 				System.out.println();
-				System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-				System.out.println("¦­     1. ·Î±×ÀÎ      ¦­      2.È¸¿ø°¡ÀÔ      ¦­     3. ÇÁ·Î±×·¥ Á¾·á    ¦­");
-				System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+				System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+				System.out.println("¦­     1.·Î±×ÀÎ      ¦­      2.È¸¿ø°¡ÀÔ      ¦­     3.ÇÁ·Î±×·¥ Á¾·á    ¦­");
+				System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 				System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 				int menu = 0;
 				try {
@@ -110,6 +110,9 @@ public class TheaterApp {
 					if (userDao.signUp(user)) {
 						System.out.println("È¸¿ø°¡ÀÔ ¿Ï·á!");
 					}
+					else {
+						System.out.println("È¸¿ø°¡ÀÔ¿¡ ½ÇÆÐÇß½À´Ï´Ù");
+					}
 					break;
 
 				case 3:
@@ -165,9 +168,9 @@ public class TheaterApp {
 
 						// ¼­ºê¸Þ´º.
 						System.out.println();
-						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ ÆäÀÌÁö ¦­ 3. ¿µÈ­ »ó¼¼ Á¤º¸ ¦­ 4. ³ª°¡±â ¦­");
-						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2.´ÙÀ½ ÆäÀÌÁö ¦­ 3.¿µÈ­ »ó¼¼ Á¤º¸ ¦­ 4.³ª°¡±â ¦­");
+						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 						System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 						int subMenu;
 						try {
@@ -235,9 +238,9 @@ public class TheaterApp {
 
 					// ¼­ºê¸Þ´º.
 					System.out.println();
-					System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-					System.out.println("¦­ 1.¿µÈ­ »ó¼¼ Á¤º¸ ¦­ 2. ³ª°¡±â ¦­");
-					System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+					System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+					System.out.println("¦­ 1.¿µÈ­ »ó¼¼ Á¤º¸ ¦­ 2.³ª°¡±â ¦­");
+					System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 					System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 
 					int subMenu;
@@ -292,9 +295,9 @@ public class TheaterApp {
 
 						// ¼­ºê¸Þ´º.
 						System.out.println();
-						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ ÆäÀÌÁö ¦­ 3. ¿µÈ­ ¿¹¸Å ÇÏ±â ¦­ 4. ³ª°¡±â ¦­");
-						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2.´ÙÀ½ ÆäÀÌÁö ¦­ 3.¿µÈ­ ¿¹¸Å ÇÏ±â ¦­ 4.³ª°¡±â ¦­");
+						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 						System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 						try {
 							subMenu = Integer.parseInt(scn.nextLine());
@@ -362,11 +365,11 @@ public class TheaterApp {
 								}
 
 								System.out.println("\n< »ó¿µ ½Ã°£Ç¥ >");
-								System.out.println("  ¹øÈ£	  ¿µÈ­ ÀÌ¸§	  	  »ó¿µ ½Ã°£        ³²Àº ÁÂ¼®      ÇÒÀÎ");
+								System.out.println("  ¹øÈ£	  ¿µÈ­ ÀÌ¸§	  	    »ó¿µ ½Ã°£        ³²Àº ÁÂ¼®      ÇÒÀÎ");
 								System.out.println(
 										"----------------------------------------------------------------------------------");
 
-								scheduleDao.showScheduleList(schedules, page);
+								scheduleDao.showScheduleList2(schedules, page);
 
 								System.out.println(
 										"----------------------------------------------------------------------------------");
@@ -382,19 +385,18 @@ public class TheaterApp {
 								}
 
 								System.out.println();
-								System.out
-										.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-								System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ ÆäÀÌÁö ¦­ 3. »ó¿µ ½Ã°£ ¼±ÅÃ ¦­ 4. ³ª°¡±â ¦­");
-								System.out
-										.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+								System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+								System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2.´ÙÀ½ ÆäÀÌÁö ¦­ 3.»ó¿µ ½Ã°£ ¼±ÅÃ ¦­ 4.³ª°¡±â ¦­");
+								System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 								System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+								int subMenu2 = 0;
 								try {
-									subMenu = Integer.parseInt(scn.nextLine());
+									subMenu2 = Integer.parseInt(scn.nextLine());
 								} catch (Exception e) {
-									subMenu = 0;
+									subMenu2 = 0;
 								}
 
-								switch (subMenu) {
+								switch (subMenu2) {
 								// 3-1. ÀÌÀü ÆäÀÌÁö.
 								case 1:
 									if (page > 1) {
@@ -438,7 +440,7 @@ public class TheaterApp {
 									char rowChar;
 									int column = 0;
 									for (int i = 0; i < adult; i++) {
-										scheduleDao.showSeats();
+										scheduleDao.showSeats(scheduleId);
 
 										System.out.println("¿¹¸ÅÇÒ ÁÂ¼®À» ¼±ÅÃÇÏ¼¼¿ä(¼ºÀÎ)");
 										try {
@@ -469,7 +471,7 @@ public class TheaterApp {
 										Ticket ticket = new Ticket(userId, scheduleId, "¼ºÀÎ", row, column, discount);
 
 										System.out.println(ticket.reserveDate);
-										if (ticketDao.isOccupied(row, column)) {
+										if (ticketDao.isOccupied(row, column, scheduleId)) {
 											System.out.println("ÀÌ¹Ì ¿¹¸ÅµÈ ÁÂ¼®ÀÔ´Ï´Ù\n");
 											i--;
 											continue;
@@ -488,7 +490,7 @@ public class TheaterApp {
 									} // end of for
 
 									for (int i = 0; i < youth; i++) {
-										scheduleDao.showSeats();
+										scheduleDao.showSeats(scheduleId);
 
 										System.out.println("¿¹¸ÅÇÒ ÁÂ¼®À» ¼±ÅÃÇÏ¼¼¿ä(Ã»¼Ò³â)");
 										try {
@@ -517,7 +519,7 @@ public class TheaterApp {
 
 										String row = String.valueOf(rowChar);
 										Ticket ticket = new Ticket(userId, scheduleId, "Ã»¼Ò³â", row, column, discount);
-										if (ticketDao.isOccupied(row, column)) {
+										if (ticketDao.isOccupied(row, column, scheduleId)) {
 											System.out.println("ÀÌ¹Ì ¿¹¸ÅµÈ ÁÂ¼®ÀÔ´Ï´Ù\n");
 											i--;
 											continue;
@@ -543,6 +545,7 @@ public class TheaterApp {
 									break;
 								}
 							} // end of while(run6)
+							break;
 						case 4:
 							run5 = false;
 							break;
@@ -551,15 +554,15 @@ public class TheaterApp {
 
 						}
 					} // end of while(run5)
-
+					break;
 					// 4. ¸¶ÀÌÆäÀÌÁö
 				case 4:
 					boolean run7 = true;
 					while (run7) {
 						System.out.println();
-						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-						System.out.println("¦­ 1.¿¹¸Å È®ÀÎ ¦­ 2. ÁÂ¼® º¯°æ ¦­ 3. ¿¹¸Å Ãë¼Ò ¦­ 4. ³ª°¡±â ¦­");
-						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+						System.out.println("¦­ 1.¿¹¸Å È®ÀÎ ¦­ 2.ÁÂ¼® º¯°æ ¦­ 3.¿¹¸Å Ãë¼Ò ¦­ 4.³» Á¤º¸ ¦­ 5.³ª°¡±â ¦­");
+						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 						System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 						try {
 							subMenu = Integer.parseInt(scn.nextLine());
@@ -577,9 +580,9 @@ public class TheaterApp {
 							ticketDao.showTicket(userId);
 							System.out.println(
 									"----------------------------------------------------------------------------------");
-							System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-							System.out.println("¦­ 1. ¿µÈ­Ç¥ º¸±â ¦­ 2. ³ª°¡±â ¦­");
-							System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+							System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+							System.out.println("¦­ 1.¿µÈ­Ç¥ º¸±â ¦­ 2.³ª°¡±â ¦­");
+							System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 							int subMenu2 = 0;
 							try {
 								subMenu2 = Integer.parseInt(scn.nextLine());
@@ -636,11 +639,11 @@ public class TheaterApp {
 								System.out.println("¿¹¸Å ¹øÈ£°¡ ¾ø½À´Ï´Ù");
 								break;
 							} else {
-								ticketDao.getScheduleId(modNum);
+								int scheduleId = ticketDao.getScheduleId(modNum);
 
 								char rowChar;
 								int column = 0;
-								scheduleDao.showSeats();
+								scheduleDao.showSeats(scheduleId);
 
 								System.out.println("º¯°æÇÒ ÁÂ¼®À» ¼±ÅÃÇÏ¼¼¿ä");
 								try {
@@ -664,7 +667,7 @@ public class TheaterApp {
 
 								String row = String.valueOf(rowChar);
 
-								if (ticketDao.isOccupied(row, column)) {
+								if (ticketDao.isOccupied(row, column, modNum)) {
 									System.out.println("ÀÌ¹Ì ¿¹¸ÅµÈ ÁÂ¼®ÀÔ´Ï´Ù\n");
 									break;
 								} else {
@@ -704,7 +707,19 @@ public class TheaterApp {
 								}
 							}
 							break;
+						// ³» Á¤º¸
 						case 4:
+							System.out.println("< ³» Á¤º¸ º¸±â >");
+							User user = userDao.getUser(userId);
+							System.out.println("----------------------------------------------------------------------------------\n");
+							System.out.println("¾ÆÀÌµð\t: " + user.getUserId());
+							System.out.println("ÀÌ¸§\t: " + user.getUserName());
+							System.out.println("¿¬¶ôÃ³\t: " + user.getUserTel());
+							System.out.println("°¡ÀÔÀÏ\t: " + user.getJoinDate());
+							System.out.println("\n----------------------------------------------------------------------------------");
+							break;
+						// ³ª°¡±â
+						case 5:
 							run7 = false;
 							break;
 						default:
@@ -762,11 +777,9 @@ public class TheaterApp {
 
 						// ¼­ºê¸Þ´º.
 						System.out.println();
-						System.out.println(
-								"¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ ÆäÀÌÁö ¦­ 3. Á¤º¸ ¦­ 4. Ãß°¡ ¦­ 5. »èÁ¦ ¦­ 6. ³ª°¡±â ¦­");
-						System.out.println(
-								"¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2.´ÙÀ½ ÆäÀÌÁö ¦­ 3.Á¤º¸ ¦­ 4.Ãß°¡ ¦­ 5.»èÁ¦ ¦­ 6.³ª°¡±â ¦­");
+						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 						System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 						int subMenu;
 						try {
@@ -939,9 +952,9 @@ public class TheaterApp {
 						}
 
 						System.out.println("\n< ¸ÞÀÎ È­¸é >");
-						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ ÆäÀÌÁö ¦­ 3. Ãß°¡ ¦­ 4. »èÁ¦ ¦­ 5. ³ª°¡±â ¦­");
-						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2.´ÙÀ½ ÆäÀÌÁö ¦­ 3.Ãß°¡ ¦­ 4.»èÁ¦ ¦­ 5.³ª°¡±â ¦­");
+						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 						System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 						int subMenu;
 						try {
@@ -1073,9 +1086,9 @@ public class TheaterApp {
 						}
 
 						System.out.println();
-						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ ÆäÀÌÁö ¦­ 3. ¸ÅÃâ È®ÀÎ ¦­ 4. ³ª°¡±â ¦­");
-						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2.´ÙÀ½ ÆäÀÌÁö ¦­ 3.¸ÅÃâ È®ÀÎ ¦­ 4.³ª°¡±â ¦­");
+						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 						System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 						int subMenu;
 						try {
@@ -1139,9 +1152,9 @@ public class TheaterApp {
 						}
 
 						System.out.println();
-						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
-						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2. ´ÙÀ½ ÆäÀÌÁö ¦­ 3. ³ª°¡±â ¦­");
-						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
+						System.out.println("¦®¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦³¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¯");
+						System.out.println("¦­ 1.ÀÌÀü ÆäÀÌÁö ¦­ 2.´ÙÀ½ ÆäÀÌÁö ¦­ 3.È¸¿ø Ãß°¡ ¦­ 4.È¸¿ø »èÁ¦ ¦­ 5. ³ª°¡±â ¦­");
+						System.out.println("¦±¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦µ¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦¬¦°");
 						System.out.print("µ¿ÀÛÀ» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
 						int subMenu;
 						try {
@@ -1165,6 +1178,68 @@ public class TheaterApp {
 							break;
 						// 4-3. ³ª°¡±â
 						case 3:
+							System.out.println("\n< È¸¿ø Ãß°¡ >");
+							System.out.print("Ãß°¡ÇÒ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+							userId = scn.nextLine();
+
+							// °ü¸®ÀÚ ¾ÆÀÌµð »ý¼º ¹æÁö
+							if (userId.equals("sys")) {
+								System.out.println("»ý¼ºÇÒ ¼ö ¾ø´Â ¾ÆÀÌµðÀÔ´Ï´Ù");
+								break;
+							}
+							// Áßº¹ ¾ÆÀÌµð »ý¼º ¹æÁö
+							if (userDao.chkUserId(userId)) {
+								System.out.println("ÀÌ¹Ì Á¸ÀçÇÏ´Â ¾ÆÀÌµðÀÔ´Ï´Ù");
+								break;
+							}
+
+							System.out.print("ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+							String passwd = scn.nextLine();
+							System.out.print("ºñ¹Ð¹øÈ£¸¦ ÇÑ¹ø ´õ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+							String passwd2 = scn.nextLine();
+
+							// ºñ¹Ð¹øÈ£ ÀÏÄ¡ È®ÀÎ.
+							if (!passwd.equals(passwd2)) {
+								System.out.println("ºñ¹Ð¹øÈ£°¡ ´Ù¸¨´Ï´Ù");
+								break;
+							}
+
+							System.out.print("ÀÌ¸§À» ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+							String userName = scn.nextLine();
+							System.out.print("¿¬¶ôÃ³¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+							String userTel = scn.nextLine();
+
+							User user = new User(userId, passwd, userName, userTel);
+							if (userDao.signUp(user)) {
+								System.out.println("È¸¿ø Ãß°¡°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù");
+							}
+							else {
+								System.out.println("È¸¿ø Ãß°¡¿¡ ½ÇÆÐÇß½À´Ï´Ù");
+							}
+							break;
+						case 4:
+							System.out.println("\n< È¸¿ø »èÁ¦ >");
+							System.out.print("»èÁ¦ÇÒ ¾ÆÀÌµð¸¦ ÀÔ·ÂÇÏ¼¼¿ä \n>>>> ");
+							userId = scn.nextLine();
+							// °ü¸®ÀÚ ¾ÆÀÌµð »èÁ¦ ¹æÁö
+							if (userId.equals("sys")) {
+								System.out.println("»èÁ¦ÇÒ ¼ö ¾ø´Â ¾ÆÀÌµðÀÔ´Ï´Ù");
+								break;
+							}
+							// ¾ø´Â ¾ÆÀÌµð ÀÔ·Â ¹æÁö
+							if (!userDao.chkUserId(userId)) {
+								System.out.println("Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµðÀÔ´Ï´Ù");
+								break;
+							}
+							if(userDao.deleteUser(userId)) {
+								System.out.println("È¸¿ø »èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù");
+							}
+							else {
+								System.out.println("È¸¿ø »èÁ¦¿¡ ½ÇÆÐÇß½À´Ï´Ù");
+							}
+							
+							break;
+						case 5:
 							run9 = false;
 							break;
 						default:

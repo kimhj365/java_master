@@ -104,13 +104,13 @@ public class ScheduleDAO {
 	List<Schedule> getAllScheduleList(String strDate) {
 		getConn();
 		List<Schedule> schedule = new ArrayList<>();
-		String sql = "SELECT  s.schedule_id, m.movie_name, "//
+		String sql = "SELECT  s.schedule_id, m.movie_name, m.movie_id, "//
 				+ "        TO_CHAR(s.schedule_date, 'yyyy-MM-dd HH24:MI') date_time, "//
 				+ "		  s.remain_seat, s.discount  "//
 				+ "   FROM    schedule s, movie m "//
 				+ "   WHERE   s.movie_id = m.movie_id "//
 				+ "   AND	  TO_CHAR(s.schedule_date, 'yyyy-MM-dd') = ? "//
-				+ "   ORDER BY 3";
+				+ "   ORDER BY 3, 4";
 
 		try {
 			psmt = conn.prepareStatement(sql);
@@ -133,7 +133,7 @@ public class ScheduleDAO {
 	}
 
 	// 1-1. 상영 시간표 페이징.
-	public static List<Schedule> paging2(List<Schedule> scheduleList, int page) {
+	public static List<Schedule> paging(List<Schedule> scheduleList, int page) {
 		List<Schedule> resultList = new ArrayList<>();
 
 		int start = (page - 1) * 5; // 0 부터 시작
@@ -149,7 +149,15 @@ public class ScheduleDAO {
 
 	// 1-2. 상영시간표 페이징해서 출력
 	public void showScheduleList(List<Schedule> searchSchedule, int page) {
-		List<Schedule> pagedScheduleList = paging2(searchSchedule, page);
+		List<Schedule> pagedScheduleList = paging(searchSchedule, page);
+
+		for (Schedule schedule : pagedScheduleList) {
+			schedule.showInfo();
+		}
+	}
+	
+	public void showScheduleList2(List<Schedule> searchSchedule, int page) {
+		List<Schedule> pagedScheduleList = paging(searchSchedule, page);
 
 		for (Schedule schedule : pagedScheduleList) {
 			schedule.showInfo2();
@@ -203,14 +211,16 @@ public class ScheduleDAO {
 	}
 
 	// 2-2. 좌석 출력
-	void showSeats() {
+	void showSeats(int scheduleId) {
 		getConn();
 		String[][] seat = iniSeats();
 
 		String sql = "SELECT  ticket_id, seat_row, seat_column "//
-				+ "FROM   ticket ";
+				+ "FROM   ticket "
+				+ "WHERE  schedule_id = ? ";
 		try {
 			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, scheduleId);
 			rs = psmt.executeQuery();
 
 			int seat_row = 0;
@@ -259,7 +269,7 @@ public class ScheduleDAO {
 	}
 
 	// 남은 자리 수 DB에 반영
-	void updateSeats(int schedulId) {
+	void updateSeats(int scheduleId) {
 		getConn();
 		String sql = "UPDATE  schedule "//
 				+ "SET     remain_seat = 50 - (SELECT  COUNT(*) "//
@@ -268,8 +278,8 @@ public class ScheduleDAO {
 				+ "WHERE   schedule_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, schedulId);
-			psmt.setInt(2, schedulId);
+			psmt.setInt(1, scheduleId);
+			psmt.setInt(2, scheduleId);
 
 			int r = psmt.executeUpdate(); // 처리된 건수 반환 => 한 건 처리시 1
 

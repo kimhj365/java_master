@@ -40,5 +40,8 @@ public class Schedule {
 	void showInfo2() {
 		System.out.printf("%5d %-20s %-20s %5d %10s\n", num, movieId, movieDate, remainSeat, discount);
 	}
+//	void showInfo2() {
+//		System.out.printf("%5d %-20s\t %-20s\t %5d %10s\n", num, movieId, movieDate, remainSeat, discount);
+//	}
 }
 

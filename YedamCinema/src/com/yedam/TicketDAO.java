@@ -69,16 +69,18 @@ public class TicketDAO {
 
 //	
 	// 1-1. ºóÀÚ¸® Ã£±â
-	boolean isOccupied(String row, int column) {
+	boolean isOccupied(String row, int column, int scheduleId) {
 		getConn();
 		String sql = "SELECT  * "//
 				+ "FROM    ticket "//
 				+ "WHERE   seat_row = ? "//
-				+ "AND     seat_column = ?";
+				+ "AND     seat_column = ? "//
+				+ "AND 	   schedule_id = ?";
 		try {
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, row);
 			psmt.setInt(2, column);
+			psmt.setInt(3, scheduleId);
 			rs = psmt.executeQuery();
 
 			if (rs.next()) {

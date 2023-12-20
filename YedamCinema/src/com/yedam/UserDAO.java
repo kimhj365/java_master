@@ -36,6 +36,33 @@ public class UserDAO {
 			e.printStackTrace();
 		}
 	}
+	User getUser(String userId) {
+		getConn();
+		User user = new User();
+		String sql = "SELECT * "//
+				+ "	  FROM	 t_user "//
+				+ "   WHERE  user_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, userId);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next()) {
+				user.setUserId(rs.getString("user_id"));
+				user.setPasswd(rs.getString("passwd"));
+				user.setUserName(rs.getString("user_name"));
+				user.setUserTel(rs.getString("user_tel"));
+				user.setJoinDate(rs.getString("join_date"));
+				return user;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return null;
+	}
 
 	// 1. 로그인.
 	boolean login(String id, String pw) {
@@ -194,5 +221,26 @@ public class UserDAO {
 		return seqNum;
 	}
 
-
+	// 유저 삭제
+	boolean deleteUser(String userId) {
+		getConn();
+		String sql = "DELETE t_user " 
+					+ "WHERE user_id = ?";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, userId);
+			
+			int r = psmt.executeUpdate(); // 처리된 건수 반환 => 한 건 처리시 1
+			if (r > 0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		} finally {
+			disConn();
+		}
+		return false;
+	}
+	
 }
