@@ -12,7 +12,7 @@ public class ScheduleDAO {
 
 	// 0. 오라클 DB 연결.
 	Connection getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.35:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url, "dev", "dev");
@@ -37,6 +37,35 @@ public class ScheduleDAO {
 		}
 	}
 
+	Schedule getSchedule(int ticketNum) {
+		getConn();
+		Schedule schedule = new Schedule();
+		String sql = "SELECT * "//
+				+ "FROM   schedule "//
+				+ "WHERE  schedule_id = (SELECT schedule_id "//
+				+ "                      FROM   ticket "//
+				+ "                      WHERE  ticket_id = ?)";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, ticketNum);
+			rs = psmt.executeQuery();
+
+			while (rs.next()) {
+				schedule.setScheduleId(rs.getInt("schedule_id"));
+				schedule.setMovieId(rs.getString("movie_id"));
+				schedule.setMovieDate(rs.getString("schedule_date"));
+				schedule.setRemainSeat(rs.getInt("remain_seat"));		
+				schedule.setDiscount(rs.getString("discount"));
+				return schedule;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return schedule;
+	}
+	
 	// 1. 상영 시간표 가져오기.
 	List<Schedule> getScheduleList(String movieId, String strDate) {
 		getConn();

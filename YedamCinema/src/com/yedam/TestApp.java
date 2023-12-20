@@ -62,6 +62,21 @@ public class TestApp {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
+		System.out.println("\n\t   영화 입장권\n");
+		System.out.println("  2023-12-19 17:30");
+		System.out.println(" ================================");
+		System.out.println("  12세 이상 관람가\n");
+		System.out.println("  서울의 봄\n");
+		System.out.println("  2023-12-25 12:00 ~ 14:30\n");
+		System.out.println("  1관 A열 5번\n");
+		System.out.println(" ================================");
+		System.out.println("  총인원 1명(성인)");
+		System.out.println("  주간 15000원\n");
+		System.out.println(" --------------------------------");
+		System.out.println("  예담시네마 동성로점\n");
+		System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
 	}
 
 }

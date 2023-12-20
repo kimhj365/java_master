@@ -17,7 +17,7 @@ public class TheaterApp {
 
 		boolean run0 = true;
 		Scanner scn = new Scanner(System.in);
-		
+
 		while (run0) {
 			boolean run1 = true;
 			boolean run2 = true;
@@ -93,21 +93,22 @@ public class TheaterApp {
 					passwd = scn.nextLine();
 					System.out.print("비밀번호를 한번 더 입력하세요 \n>>>> ");
 					String passwd2 = scn.nextLine();
+
+					// 비밀번호 일치 확인.
+					if (!passwd.equals(passwd2)) {
+						System.out.println("비밀번호가 다릅니다");
+						break;
+					}
+
 					System.out.print("이름을 입력하세요 \n>>>> ");
 					String userName = scn.nextLine();
 					System.out.print("연락처를 입력하세요 \n>>>> ");
 					String userTel = scn.nextLine();
 
-					// 비밀번호 일치 확인.
-					if (passwd.equals(passwd2)) {
-						// User 객체 생성 => UseDAO 회원가입 함수 인수값.
-						User user = new User(userId, passwd, userName, userTel);
-						if (userDao.signUp(user)) {
-							System.out.println("회원가입 완료!");
-							break;
-						}
-					} else {
-						System.out.println("비밀번호가 다릅니다");
+					// User 객체 생성 => UseDAO 회원가입 함수 인수값.
+					User user = new User(userId, passwd, userName, userTel);
+					if (userDao.signUp(user)) {
+						System.out.println("회원가입 완료!");
 					}
 					break;
 
@@ -576,6 +577,44 @@ public class TheaterApp {
 							ticketDao.showTicket(userId);
 							System.out.println(
 									"----------------------------------------------------------------------------------");
+							System.out.println("┏━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┓");
+							System.out.println("┃ 1. 영화표 보기 ┃ 2. 나가기 ┃");
+							System.out.println("┗━━━━━━━━━━━━━━━━┻━━━━━━━━━━━┛");
+							int subMenu2 = 0;
+							try {
+								subMenu2 = Integer.parseInt(scn.nextLine());
+							} catch (Exception e) {
+								subMenu2 = 0;
+							}
+							if(subMenu2 == 1) {
+								System.out.print("조회할 예매 번호를 입력하세요 \n>>>> ");
+								int scrNum = 0;
+								try {
+									scrNum = Integer.parseInt(scn.nextLine());
+								} catch (Exception e) {
+									System.out.println("올바른 예매 번호를 입력하세요");
+									break;
+								}
+								Ticket ticket = ticketDao.getTicket(scrNum);
+								Schedule schedule = scheduleDao.getSchedule(scrNum);
+								Movie movie = movieDao.getMovie(scrNum);
+								
+								System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
+								System.out.println("\n\t   영화 입장권\n");
+								System.out.println("  " + ticket.getReserveDate());
+								System.out.println(" ================================");
+								System.out.println("  " + movie.getAgeLimit() + "세 이상 관람가\n");
+								System.out.println("  " + movie.getMovieName() + "\n");
+								System.out.println("  " + schedule.getMovieDate() + "\n");
+								System.out.println("  1관 " + ticket.getSeat_row()+"열 "+ ticket.getSeat_column() +"열\n");
+								System.out.println(" ================================");
+								System.out.println("  총인원 1명("+ ticket.getAge() +")");
+								System.out.println("  " + ticket.getPrice() +"\n");
+								System.out.println(" --------------------------------");
+								System.out.println("  예담시네마 동성로점\n");
+								System.out.println("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
+							}
+
 							break;
 						// 4-2. 좌석 변경
 						case 2:
@@ -899,7 +938,7 @@ public class TheaterApp {
 							System.out.print(i + " ");
 						}
 
-						System.out.println();
+						System.out.println("\n< 메인 화면 >");
 						System.out.println("┏━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━┓");
 						System.out.println("┃ 1.이전 페이지 ┃ 2. 다음 페이지 ┃ 3. 추가 ┃ 4. 삭제 ┃ 5. 나가기 ┃");
 						System.out.println("┗━━━━━━━━━━━━━━━┻━━━━━━━━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━┻━━━━━━━━━━━┛");
@@ -1142,6 +1181,7 @@ public class TheaterApp {
 				}
 			} // end of while(run3)
 		} // end of while(run0)
+		scn.close();
 		System.out.println("end of prog.");
 	}
 

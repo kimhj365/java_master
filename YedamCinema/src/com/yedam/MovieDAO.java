@@ -11,7 +11,7 @@ public class MovieDAO {
 
 	// 0. 오라클 DB 연결.
 	Connection getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.35:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url, "dev", "dev");
@@ -216,15 +216,52 @@ public class MovieDAO {
 		return false;
 	}
 
-	String getMovieName(String movieId) {
+	Movie getMovie(int ticketNum) {
 		getConn();
-		String sql = "SELECT	* " + "FROM		movie " + "WHERE 	movie_id = ?";
+		Movie movie = new Movie();
+		String sql = "SELECT * " 
+				+ "FROM   movie "//
+				+ "WHERE  movie_id = (SELECT movie_id "// 
+				+ "                    FROM   schedule "//
+				+ "                    WHERE  schedule_id = (SELECT schedule_id "//
+				+ "                                            FROM   ticket "//
+				+ "                                            WHERE  ticket_id = ?))";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, movieId);
+			psmt.setInt(1, ticketNum);
 			rs = psmt.executeQuery();
 
-			if (rs.next()) {
+			if(rs.next()) {
+				movie.setMovieNumber(rs.getString("MOVIE_ID"));
+				movie.setMovieName(rs.getString("movie_name"));
+				movie.setDirector(rs.getString("DIRECTOR"));
+				movie.setGenre(rs.getString("GENRE"));
+				movie.setActors(rs.getString("ACTORS"));
+				movie.setReleaseDate(rs.getString("RELEASE_DATE"));
+				movie.setAgeLimit(rs.getInt("age_limit"));
+				movie.setRunningTime(rs.getInt("running_time"));
+				movie.setPlot(rs.getString("PLOT"));
+				return movie;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			disConn();
+		}
+		return movie;
+	}
+
+	String getMovieName(String movieNum) {
+		getConn();
+		String sql = "SELECT * "//
+				+ "FROM   movie "//
+				+ "WHERE  movie_id = ? ";
+		try {
+			psmt = conn.prepareStatement(sql);
+			psmt.setString(1, movieNum);
+			rs = psmt.executeQuery();
+
+			if(rs.next()) {
 				return rs.getString("movie_name");
 			}
 		} catch (Exception e) {
@@ -234,7 +271,7 @@ public class MovieDAO {
 		}
 		return null;
 	}
-
+	
 	boolean deleteMovie(String movieNum) {
 		getConn();
 		String sql = "DELETE movie "

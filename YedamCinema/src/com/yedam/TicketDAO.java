@@ -12,7 +12,7 @@ public class TicketDAO {
 
 	// 0. 오라클 DB 연결.
 	Connection getConn() {
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
+		String url = "jdbc:oracle:thin:@192.168.0.35:1521:xe";
 		try {
 			Class.forName("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(url, "dev", "dev");
@@ -120,6 +120,38 @@ public class TicketDAO {
 			disConn();
 		}
 	}
+	
+	// 3. 예매된 티켓 가져오기
+	 Ticket getTicket(int scrNum) {
+		 getConn();
+		 Ticket ticket = new Ticket();
+		 String sql = "SELECT * "//
+		 		+ "FROM   TICKET "//
+		 		+ "WHERE  TICKET_ID = ? ";//
+		 try {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, scrNum);
+				rs = psmt.executeQuery();
+
+				while (rs.next()) {
+					ticket.setTicketId(rs.getInt("TICKET_ID"));
+					ticket.setUser_id(rs.getString("USER_ID"));
+					ticket.setSchedule_id(rs.getInt("SCHEDULE_ID"));
+					ticket.setAge(rs.getString("AGE"));
+					ticket.setSeat_row(rs.getString("SEAT_ROW"));
+					ticket.setSeat_column(rs.getInt("SEAT_COLUMN"));
+					ticket.setDiscount(rs.getString("DISCOUNT"));
+					ticket.setPrice(rs.getInt("PRICE"));
+					ticket.setReserveDate(rs.getString("RESERVE_DATE"));
+					return ticket;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				disConn();
+			}
+		 return ticket;
+	 }
 
 	// 전체 예매 내역 가져오기
 	List<Ticket> getTicketList(String date) {
