@@ -1,0 +1,47 @@
+<아파치 톰캣 웹 서버>
+
+9.0  windows 64 다운로드
+DEV 폴더에 압축풀기
+이클립스 perspective => java ee
+이클립스 window =>preference => server => runtime environments => add => 아파치 톰캣 폴더
+이클립스 file => new => Dynamic Web Project
+Project name : BoardWeb / Target runtime : 아파치 톰캣 v9.0
+Generate web.xml 체크 => finish
+Project Explorer => Jave Resources => src/main/java 
+   => 여기에 java 소스 생성
+common 패키지 생성
+Sample 클래스 생성
+
+src/main/webapp 폴더 
+   => 여기에 html 소스 생성
+webapp => new=> html file => index.html
+<h3>"Hello, World!"<h3> 
+소스에서 우클릭 => Run As => Run on Server
+초기 설정: 아파치 톰캣 9.0 => finish
+이클립스 아래 서버 탭 클릭
+Ports => HTTPS => 8080 => 80으로 변경
+다시 소스에서 우클릭 => Run As => Run on Server
+(기본 포트 : 8080)
+
+webapp => new=> 폴더 => board
+board 폴더 밑에 board.html 파일 생성
+<h3>게시판<h3>
+<a href="board/board.html">게시판 이동</a>
+
+common package => new => servlet
+   => run as =>server => restart server
+
+BoardWeb 우클릭 => configure => convert to maven project
+GroupID => com.yedam / Artifact Id => BoardWeb => Finish
+BoardWeb.pom => https.maven.~ => http.maven ~으로 변경
+<packaging>war</packaging> 밑에
+ 	<dependencies></dependencies>
+구글에 maven repository 검색 => 홈페이지 접속
+"ojdbc8" 검색 => 맨 위 검색결과 클릭 => 19.3 버전 클릭
+maven 탭 복사 =>
+<packaging>war</packaging> 밑에
+<dependencies></dependencies> 태그 만들고 그 안에 붙여넣기
+lombok 검색해서 제일 위 최신버전 클릭해 같은 방식으로 복붙
+
+common 패키지 밑에 "StudentListServ" servlet생성
+@WebServlet("/StudentListServ.srv") 으로 변경
