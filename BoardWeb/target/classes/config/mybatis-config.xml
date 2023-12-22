@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<settings>
+	<setting name="mapUnderscoreToCamelCase" value="true" />
+</settings>
+<typeAliases>
+  <typeAlias alias="student" type="com.yedam.student.vo.Student"/>
+  <typeAlias alias="board" type="com.yedam.board.vo.BoardVO"/>
+</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@localhost:1521:xe" />
+				<property name="username" value="dev" />
+				<property name="password" value="dev" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="com/yedam/student/mapper/StudentMapper.xml" />
+		<mapper resource="com/yedam/board/mapper/BoardMapper.xml" />
+	</mappers>
+</configuration>

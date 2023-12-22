@@ -1,4 +1,4 @@
-package common;
+package com.yedam.student.command;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,7 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/studentList")	// Ȯ���� �ƴϰ� URL
+import com.yedam.student.service.StudentService;
+import com.yedam.student.serviceImpl.StudentServiceMybatis;
+import com.yedam.student.vo.Student;
+
+@WebServlet("/studentList")
 public class StudentListServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -23,15 +27,15 @@ public class StudentListServ extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();	
 		
-		StudentDAO dao = new StudentDAO();
-		List<Student> list = dao.getStudentList();
+		StudentService dao = new StudentServiceMybatis();
+		List<Student> list = dao.studentList();
 		
 		String str = "<table border= '1'>";
 		str += "<thead><tr><th>학번</th><th>이름</th><th>영어</th><th>수학</th><tr></thead>";
 		str += "<tbody>";
 		for(Student std : list) {
-			str += "<tr><td><a href='getStudentServlet?sno="+std.getStuNum()+"'>" + std.getStuNum() + "</a></td><td>" + std.getStuName()//
-			+ "</td><td>" + std.getEngScore() + "</td><td>" + std.getMathScore()//
+			str += "<tr><td><a href='getStudentServlet?sno="+std.getStudentNumber()+"'>" + std.getStudentNumber() + "</a></td><td>" + std.getStudentName()//
+			+ "</td><td>" + std.getEnglishScore() + "</td><td>" + std.getMathematicsScore()//
 			+ "</td></tr>";
 		}
 		str += "</tbody></table>";
