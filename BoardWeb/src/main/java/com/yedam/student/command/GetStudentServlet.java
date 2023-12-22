@@ -1,4 +1,4 @@
-package common;
+package com.yedam.student.command;
 
 import java.io.IOException;
 
@@ -7,6 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.yedam.student.service.StudentService;
+import com.yedam.student.serviceImpl.StudentServiceImpl;
+import com.yedam.student.vo.Student;
 
 @WebServlet("/getStudentServlet")
 public class GetStudentServlet extends HttpServlet {
@@ -17,17 +21,17 @@ public class GetStudentServlet extends HttpServlet {
 		
 		String sno = req.getParameter("sno");
 		
-		StudentDAO dao = new StudentDAO();
+		StudentService dao = new StudentServiceImpl();
 		Student std = dao.getStudent(sno);
 		
 		String str = "<table border = '1'>";
 		str += "<caption>학생정보</caption>";
-		str += "<tr><th>학번</th><td>" + std.getStuNum() + "</td></tr>";
-		str += "<tr><th>이름</th><td>" + std.getStuName() + "</td></tr>";
-		str += "<tr><th>영어</th><td>" + std.getEngScore() + "</td></tr>";
-		str += "<tr><th>수학</th><td>" + std.getMathScore() + "</td></tr>";
+		str += "<tr><th>학번</th><td>" + std.getStudentNumber() + "</td></tr>";
+		str += "<tr><th>이름</th><td>" + std.getStudentName() + "</td></tr>";
+		str += "<tr><th>영어</th><td>" + std.getEnglishScore() + "</td></tr>";
+		str += "<tr><th>수학</th><td>" + std.getMathematicsScore() + "</td></tr>";
 		str += "</table>";
-		str += "<br><a href='modifyStudent?sno=" + std.getStuNum() + "'>정보 수정</a>";
+		str += "<br><a href='modifyStudent?sno=" + std.getStudentNumber() + "'>정보 수정</a>";
 		str += "<br><a href='studentList'>목록</a>";
 		
 		resp.getWriter().print(str);

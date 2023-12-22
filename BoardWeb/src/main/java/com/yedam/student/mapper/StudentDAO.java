@@ -1,4 +1,4 @@
-package common;
+package com.yedam.student.mapper;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.yedam.student.vo.Student;
 
 
 public class StudentDAO {
@@ -64,10 +66,10 @@ public class StudentDAO {
 			rs = psmt.executeQuery();
 			while(rs.next()) {
 				Student student = new Student();
-				student.setStuNum(rs.getString("student_number"));
-				student.setStuName(rs.getString("student_name"));
-				student.setEngScore(rs.getInt("english_score"));
-				student.setMathScore(rs.getInt("mathematics_score"));
+				student.setStudentNumber(rs.getString("student_number"));
+				student.setStudentName(rs.getString("student_name"));
+				student.setEnglishScore(rs.getInt("english_score"));
+				student.setMathematicsScore(rs.getInt("mathematics_score"));
 				
 				students.add(student);
 			}
@@ -82,10 +84,10 @@ public class StudentDAO {
 		String sql = "INSERT INTO student VALUES(?, ?, ?, ?)";
 		try {
 			psmt = conn.prepareStatement(sql);
-			psmt.setString(1, std.getStuNum());
-			psmt.setString(2, std.getStuName());
-			psmt.setInt(3, std.getEngScore());
-			psmt.setInt(4, std.getMathScore());
+			psmt.setString(1, std.getStudentNumber());
+			psmt.setString(2, std.getStudentName());
+			psmt.setInt(3, std.getEnglishScore());
+			psmt.setInt(4, std.getMathematicsScore());
 			
 			int r = psmt.executeUpdate();
 			if(r == 1) {
@@ -107,10 +109,10 @@ public class StudentDAO {
 			
 			if(rs.next()) {
 				Student student = new Student();
-				student.setStuNum(rs.getString("student_number"));
-				student.setStuName(rs.getString("student_name"));
-				student.setEngScore(rs.getInt("english_score"));
-				student.setMathScore(rs.getInt("mathematics_score"));
+				student.setStudentNumber(rs.getString("student_number"));
+				student.setStudentName(rs.getString("student_name"));
+				student.setEnglishScore(rs.getInt("english_score"));
+				student.setMathematicsScore(rs.getInt("mathematics_score"));
 				return student;
 			}
 		} catch (SQLException e) {
