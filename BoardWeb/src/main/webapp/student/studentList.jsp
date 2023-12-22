@@ -25,10 +25,10 @@
 			for (Student std : list) {
 			%>
 			<tr>
-				<td><a href='studentInfo.jsp?sno=<%=std.getStuNum()%>'><%=std.getStuNum() %></a></td>
-				<td><%=std.getStuName() %></td>
-				<td><%=std.getEngScore() %></td>
-				<td><%=std.getMathScore() %></td>
+				<td><a href='studentInfo.jsp?sno=<%=std.getStudentNumber()%>'><%=std.getStudentNumber() %></a></td>
+				<td><%=std.getStudentName() %></td>
+				<td><%=std.getEnglishScore() %></td>
+				<td><%=std.getMathematicsScore() %></td>
 			</tr>
 			<%
 			}
