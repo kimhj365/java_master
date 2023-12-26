@@ -21,19 +21,19 @@
 	<caption>학생정보</caption>
 	<tr>
 		<th>학생번호</th>
-		<td><%=std.getStuNum()%></td>
+		<td><%=std.getStudentNumber()%></td>
 	</tr>
 	<tr>
 		<th>학생이름</th>
-		<td><%=std.getStuName()%></td>
+		<td><%=std.getStudentName()%></td>
 	</tr>
 	<tr>
 		<th>영어점수</th>
-		<td><%=std.getEngScore()%></td>
+		<td><%=std.getEnglishScore()%></td>
 	</tr>
 	<tr>
 		<th>수학점수</th>
-		<td><%=std.getMathScore()%></td>
+		<td><%=std.getMathematicsScore()%></td>
 	</tr>
 
 </table>

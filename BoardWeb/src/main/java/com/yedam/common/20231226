@@ -1,0 +1,29 @@
+20231226 수업
+
+<JSP>
+
+URL 패턴		=> 컨트롤				=> JSP
+boardList.do	=> BoardListControl		=> boardList.jsp
+boardForm.do	=> BoardFromControl		=> addBoard.jsp
+addBoard.do		=> AddBoardControl		=> resp.senRedirect(); boardList.jsp
+
+getBoard.do		=> GetBoardControl		=> getBoard.jsp
+
+--수정
+modifyForm.do	=> ModifyFormControl	=> modBoardForm.jsp 
+modifyBoard.do	=> ModifyBoardControl	=> resp.sendRedirect();
+--삭제
+removeForm.do	=> RemoveFormControl	=> remBoardForm.jsp 
+removeBoard.do	=> RemoveBoardControl	=> resp.sendRedirect();
+
+
+
+-----------------------
+<부트스트랩>
+
+google - start bootstrap - simple sidebar 다운로드 => webapp 폴더에 붙여넣기
+webapp 밑에 layout 폴더 생성, 
+
+
+-----------------------
+https://www.w3schools.com/howto/howto_css_login_form.asp
