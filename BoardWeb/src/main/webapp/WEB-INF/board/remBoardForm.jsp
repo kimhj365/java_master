@@ -1,19 +1,14 @@
 <%@page import="com.yedam.board.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>remBoardForm.jsp</title>
-</head>
-<body>
+<%@ include file="../layout/menu.jsp" %>
+<%@ include file="../layout/nav.jsp" %>
 	<%
         BoardVO vo = (BoardVO) request.getAttribute("vo");
     %>
     <form name="myForm" action="removeBoard.do">
     <input type="hidden" name="bno" value="<%=vo.getBoardNo() %>">
-	    <table border='1'>
+	    <table class="table">
 	        <tbody>
 	            <tr>
 	                <th>글번호</th>
@@ -52,5 +47,4 @@
     </form>
     <br>
     <a href="boardList.do">글목록으로</a>
-</body>
-</html>
+<%@ include file="../layout/foot.jsp" %>

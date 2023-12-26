@@ -1,20 +1,15 @@
 <%@page import="com.yedam.board.vo.BoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ include file="../layout/menu.jsp" %>
+<%@ include file="../layout/nav.jsp" %>
 	<h3>수정화면</h3>
 	<%
         BoardVO vo = (BoardVO) request.getAttribute("vo");
     %>
     <form action="modifyBoard.do">
     <input type="hidden" name="bno" value="<%=vo.getBoardNo() %>">
-	    <table border='1'>
+	    <table class="table">
 	        <tbody>
 	            <tr>
 	                <th>글번호</th>
@@ -55,5 +50,4 @@
     </form>
     <br>
     <a href="boardList.do">글목록으로</a>
-</body>
-</html>
+<%@ include file="../layout/foot.jsp" %>
