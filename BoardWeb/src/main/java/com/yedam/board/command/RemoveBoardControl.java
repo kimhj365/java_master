@@ -20,13 +20,13 @@ public class RemoveBoardControl implements Control {
 		
 		if(svc.remBoard(Integer.parseInt(bno))) {
 			try {
-				resp.sendRedirect("/BoardWeb/boardList.do");
+				resp.sendRedirect("boardList.do");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
 			try {
-				resp.sendRedirect("/BoardWeb/getBoard.do?bno=" + bno);
+				resp.sendRedirect("getBoard.do?bno=" + bno);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

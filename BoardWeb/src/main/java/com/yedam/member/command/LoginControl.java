@@ -40,7 +40,7 @@ public class LoginControl implements Control {
 		} else {
 			req.setAttribute("message", "아이디와 비밀번호를 확인하세요");
 			try {
-				req.getRequestDispatcher("WEB-INF/member/loginForm.jsp").forward(req, resp);
+				req.getRequestDispatcher("member/loginForm.tiles").forward(req, resp);
 			} catch (ServletException | IOException e) {
 				e.printStackTrace();
 			}

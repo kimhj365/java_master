@@ -11,8 +11,8 @@
 		SELECT * FROM board	WHERE board_no = #{bno} ORDER BY 1
 	</select>
 	<insert id="insertBoard" parameterType="board" >
-		INSERT INTO board(board_no, title, writer, content)
-		VALUES (board_seq.NEXTVAL, #{title}, #{writer}, #{content})
+		INSERT INTO board(board_no, title, writer, content, image)
+		VALUES (board_seq.NEXTVAL, #{title}, #{writer}, #{content}, #{image})
 	</insert>
 	<update id="updateBoard" parameterType="board" >
 		UPDATE board SET content = #{content} WHERE board_no = #{boardNo}

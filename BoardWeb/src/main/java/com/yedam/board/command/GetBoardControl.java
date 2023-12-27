@@ -25,7 +25,7 @@ public class GetBoardControl implements Control {
 		
 		// "vo" 이름으로 req의 어트리뷰트 지정
 		req.setAttribute("vo", vo);
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/getBoard.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("board/getBoard.tiles");
 		try {
 			rd.forward(req, resp);
 		} catch (ServletException | IOException e) {

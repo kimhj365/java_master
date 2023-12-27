@@ -29,7 +29,7 @@ public class BoardListControl implements Control {
 		// Control 페이지가 보여지는 것을 다시 JSP 페이지로 이동시킴(재지정)
 		// requestDispatcher 객체 : 요청을 재지정해줌
 		// =>  BoardListControl에서 보여지는 페이지를
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/boardList.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("board/boardList.tiles");
 		try {
 			rd.forward(req,resp);
 		} catch (ServletException | IOException e) {

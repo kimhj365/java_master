@@ -34,7 +34,7 @@ public class ModifyBoardControl implements Control {
 		} else {
 			// 등록 실패시 수정 페이지로 이동
 			try {
-				resp.sendRedirect("/modifyForm.do");
+				resp.sendRedirect("modifyForm.do");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

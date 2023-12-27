@@ -15,7 +15,7 @@ public class BoardFormControl implements Control {
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// 등록화면 open
 		// Form: 기능 없고 페이지 보여주기 용도
-		RequestDispatcher rd = req.getRequestDispatcher("WEB-INF/board/addBoardForm.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("board/addBoardForm.tiles");
 		try {
 			rd.forward(req, resp);
 		} catch (ServletException | IOException e) {

@@ -1,0 +1,12 @@
+<이클립스 마이바티스 함수 경로 플러그인>
+
+help - eclipse market place - mybatipse 검색
+
+
+<JSTL>
+JSP 기본 제공 태그보다 많은 기능 가진 라이브러리
+
+구글 apache jstl 검색
+최신 버전 다운로드(v1.2.3)
+binary readme 클릭
+<dependency>태그 => maven에서 쓸수 있는 부분 복사
