@@ -2,11 +2,13 @@
 <!DOCTYPE configuration
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
+
 <configuration>
 <settings>
 	<setting name="mapUnderscoreToCamelCase" value="true" />
 	<setting name="jdbcTypeForNull" value="NULL" />
 </settings>
+
 <typeAliases>
   <typeAlias alias="student" type="com.yedam.student.vo.Student"/>
   <typeAlias alias="board" type="com.yedam.board.vo.BoardVO"/>

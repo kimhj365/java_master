@@ -10,10 +10,19 @@
     <put-attribute name="menu" value="/tiles/common_menu.jsp"/>
     <put-attribute name="body" value="/tiles/home_body.jsp"/>
     <put-attribute name="footer" value="/tiles/credits.jsp"/>
-  </definition>
-  
+  </definition>  
   <definition name="WILDCARD:student/*" extends="myapp.homepage">
   	<put-attribute name="body" value="/student/{1}.jsp"/>
+  </definition>
+   
+  <definition name="myadmin" template="/WEB-INF/admin/template.jsp">
+  	<put-attribute name="nav" value="/WEB-INF/admin/nav.jsp"/>
+  	<put-attribute name="menu" value="/WEB-INF/admin/menu.jsp"/>
+  	<put-attribute name="body" value="/WEB-INF/admin/body.jsp"/>
+  	<put-attribute name="footer" value="/WEB-INF/admin/footer.jsp"/>
+  </definition>
+  <definition name="WILDCARD:admin/*" extends="myadmin">
+  	<put-attribute name="body" value="/WEB-INF/member/{1}.jsp"/>
   </definition>
   
   <definition name="myhomepage" template="/WEB-INF/board/layout/template.jsp">
@@ -21,9 +30,9 @@
   	<put-attribute name="nav" value="/WEB-INF/board/layout/nav.jsp"/>
   	<put-attribute name="body" value="/WEB-INF/board/layout/body.jsp"/>
   </definition>
-  
   <definition name="WILDCARD:*/*" extends="myhomepage">
   	<put-attribute name="body" value="/WEB-INF/{1}/{2}.jsp"/>
   </definition>
+  
   
 </tiles-definitions>

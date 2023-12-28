@@ -2,8 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
 <mapper namespace="com.yedam.member.mapper.MemberMapper">
 	<select id="selectMember" resultType="member">
 		SELECT * FROM member WHERE id=#{id} AND pw=#{pw}
+	</select>
+	<select id="selectList" resultType="member">
+		SELECT * FROM member ORDER BY 1
+	</select>
+	<select id="selectOne" resultType="member" parameterType="String">
+		SELECT * FROM member WHERE id = #{id} ORDER BY 1
 	</select>
 </mapper>
