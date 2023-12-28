@@ -6,5 +6,6 @@ import com.yedam.product.vo.ProductVO;
 
 public interface ProductMapper {
 	List<ProductVO> selectList();
+	List<ProductVO> selectListLikeIt();
 	ProductVO getProduct(String pno);
 }

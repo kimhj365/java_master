@@ -22,7 +22,7 @@ public class ProductInfoControl implements Control {
 		
 		ProductService svc = new ProductServiceImpl();
 		ProductVO vo = svc.getProduct(productCode);
-		List<ProductVO> list = svc.productList();
+		List<ProductVO> list = svc.productListLikeIt();
 		
 		req.setAttribute("vo", vo);
 		req.setAttribute("productList", list);
