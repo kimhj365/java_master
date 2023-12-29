@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom01.html</title>
+</head>
+<body>
+    <!-- 표. -->
+   
+
+    <script>
+        // DOM
+
+        // 1. 버튼 만들기
+        console.log(window);
+        // button 태그로 감싸는 함수
+        let btn = document.createElement('button'); // 오브젝트
+        // 내용 속성에 'Btn' 대입
+        btn.innerText = 'Btn';
+        // 버튼에 이벤트 추가 함수(이벤트 유형, 실행 함수)
+        btn.addEventListener('click', function(){
+            window.alert("Click 됨.");
+        })
+        console.log(btn);
+        
+
+        // 'body'태그 찾아서 btn 태그 추가
+        document.querySelector('body').appendChild(btn);
+
+        
+        // 2. 목록 만들기(for문)
+        const fruits = ['apple', 'banana', 'cherry'];
+        let ul = document.createElement('ul');
+        // 배열 for 문 : 배열 요소 하나씩 가져옴(for ~ of ~)
+        for(let fruit of fruits){
+            let li = document.createElement('li');
+            li.innerText = fruit;
+            ul.appendChild(li);
+        }
+        document.querySelector('body').appendChild(ul);
+
+
+        // 3. 테이블 만들기
+        let table = document.createElement('table');
+        let tbody = document.createElement('tbody');
+        let thead = document.createElement('thead');
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        let tr1 = document.createElement('tr');
+        thead.appendChild(tr1);
+         
+        let tr2 = document.createElement('tr');
+        tbody.appendChild(tr2);
+
+        let tr3 = document.createElement('tr');
+        tbody.appendChild(tr3);
+        
+        let ths = ['아이디', '이름', '전화번호'];
+        for(let th of ths){
+            let th1 = document.createElement('th');
+            th1.innerText = th;
+            tr1.appendChild(th1);
+        }
+       
+        let tds1 = ['user1', '홍길동', '010-1111'];
+        for(let td of tds1){
+            let td1 = document.createElement('td');
+            td1.innerText = td;
+            tr2.appendChild(td1);
+        }
+
+        let tds2 = ['user2', '김현준', '010-2222'];
+        for(let td of tds2){
+            let td1 = document.createElement('td');
+            td1.innerText = td;
+            tr3.appendChild(td1);
+        }
+
+        document.querySelector('body').appendChild(table);
+
+        // 스타일 태그
+        let style = document.createElement('style');
+        style.innerText = 'table, th, td {border: 1px solid black; border-collapse: collapse;}';
+        document.querySelector('head').appendChild(style);
+
+    
+
+    </script>
+</body>
+</html>
