@@ -1,2 +1,7 @@
 /com/
-/config/
+/common/
+/build/
+/target/
+.classpath
+.project
+.settings/

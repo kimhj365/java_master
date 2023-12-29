@@ -7,27 +7,34 @@
     <style>
         #show {
             width: 300px;
-            height: 250px;
+            height: 350px;
             background-color: aqua;
+            text-align: center;
         }
         span {
             display: inline-block;
-            width: 80px;
+            width: 90px;
             height: 30px;
             background-color: yellow;
+            margin: 1px;
+            text-align: center;
         }
     </style>
 
 </head>
 <body>
     <div id="show">
-        <span>Lorem</span>
-        <span>ipsum,</span>
     </div>
     <script>
         const words = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum ullam doloremque, accusamus voluptatem eos assumenda tenetur enim voluptatum corporis, exercitationem odit mollitia adipisci obcaecati alias reiciendis quisquam sunt ea at.';
         const wordAry = words.split(' ');
         // 숙제: span 태그로 감싸서 show에 추가추가 해서 쌓기(DOM 사용)
+        wordAry.forEach(function(item, idx, ary){
+            let spn = document.createElement('span');
+            spn.innerText = item;
+            document.querySelector('#show').appendChild(spn);
+        });
+
     </script>
 </body>
 </html>
