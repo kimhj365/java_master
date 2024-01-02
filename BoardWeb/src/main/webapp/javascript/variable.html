@@ -1,128 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>variable.html</title>
 </head>
+
 <body>
     <h1>Hello</h1>
+    <!-- <script src="variable.js"></script> -->
     <script>
-        // 변수
-        // var: 함수 레벨 / let, const : 블록 레벨.
+        // <데이터 타입>
 
-        // 1. var: 함수 범위 안에서만 유효함.
-        // => 블럭 의미X. 중복 선언해도 에러 안남.
-        
-        // (1)
-        var name1 = "Hwang";
-        function myfunc1(){
-            var name1 = "Hong";
-            console.log(name1);
+        // 함수 리턴값 지정 안할 시 기본 리턴값 : undefined
+        function myfunc() {
+            console.log('myfunc call.');
+            //return undefined
         }
-        myfunc1();           // "Hong"
-        console.log(name1);  // "Hwang"
+        console.log(myfunc());  // 'myfunc call.' / undefined
 
-        // (2)
-        var name2 = "Hwang";
-        function myfunc2(){
-            name2 = "Hong";
-            console.log(name2);
+        // 변수 값 지정 안할시 기본 타입 : undifined.
+        let num;
+        console.log(num);           // undefined
+        console.log(typeof num);    // 'undefined'
+
+        // null값 : object 타입
+        num = null;
+        console.log(num);           // null
+        console.log(typeof num);    // 'onject'
+
+        // 선언하는 시점의 타입 : undefined
+        // 값을 넣고 나면 타입 지정됨
+        let num1;
+        let num2 = null;
+        console.log(num1 == num2);  // true
+        console.log(num1 === num2); // false
+
+        // null, undefined, '', 0 =>  false
+        if (!num1) { // !undefined => true
+            console.log('num값은 false 입니다.')
         }
-        myfunc2();            // "Hong"
-        console.log(name2);   // "Hong"
 
-        // (3)
-        var name3 = "Hwang";
-        {
-            var name3 = "Hong"
-            console.log(name3); // "Hong"
+        // parseInt, parseFloat
+        num1 = '30';    // 문자열
+        console.log(num1, typeof num1); // '30' string
+
+        num1 = parseInt(num1);
+        console.log(num1, typeof num1); // 30 'number'
+
+        // 숫자 아닌 문자열값 parse => NaN
+        num2 = 'a30';
+        num2 = parseInt(num2);
+        console.log(num2, typeof num2); // NaN 'number'
+
+        // 삼항 연산자
+        let result = 3 > 2 ? 'true' : 'false';
+        console.log(result);    // 'true'
+
+        // 논리 연산자
+        console.log(!'문자열'); // !(값 있으면 true) => false
+
+        // 비트 연산자
+        console.log(12 & 3); // 1100 & 0011 => 0000
+        console.log(12 | 3); // 1100 | 0011 => 1111 => 15
+        console.log(12 >> 1); // 1100 => 110    =>  6
+        console.log(12 << 2); // 1100 => 110000 =>  48
+
+        // 반복문
+        // for of : 배열의 요소값
+        let friends = [{ name: '라이언', age: 5 }, { name: '어피치', age: 4 }]; // 객체
+        for (let friend of friends) {
+            console.log(friend);
+            console.log('이름 : ' + friend.name + ', 나이 : ' + friend.age);
         }
-        console.log(name3);     // "Hong"
 
-        // 2. let: 블럭 레벨 범위.
-        //  => 블럭 안에서만 유효한 값. 블럭 벗어나면 X.
-        let age = 20;
-        {
-            let age = 22;
-            console.log(age);   // 22
+        // for in : 객체의 속성값
+        for (let prop in friends[0]) {
+            console.log(prop);
+            console.log('속성 : ' + prop + ', 값 : ' + friends[0][prop]);
         }
-        console.log(age);       // 20
 
-
-        // this
-        // 1. 전역영역: window 객체.
-        console.log(this);
-
-        // 2. 함수: window 객체.
-        function thisfunc(){
-            console.log(this);
-        }
-        thisfunc();
-
-        // 3. 객체: object.
-        let obj ={
-            id: 'Hong',
-            age: 20,
-            show: function(){
-                console.log(this);
+        // forEach(function(요소, 인덱스, 배열){});
+        friends[friends.length] = { name: '콘', age: 2 };
+        friends[friends.length] = { name: '무지', age: 3 };
+        console.log(friends);
+        friends.forEach(function (friend, idx, friendsAry) {
+            // if(friend['age'] > 3){
+            // if(idx % 2 == 0){
+            if (idx == friendsAry.length - 1) {
+                console.log(friend, idx, friendsAry);
             }
-        }
-        obj.show();
-
-        // 4. 이벤트: 이벤트를 받는 대상(실행 대상).
-        document.body.addEventListener('click', function(){ // 이벤트 핸들러.
-            console.log(this);
         });
 
+        // 테이블 만들기 (DOM)
+        // table
+        let show = document.createElement('div');
+        show.setAttribute('id', 'show');
 
-        // 함수 이름 - 변수 이름.
-        // let show = 'Hello';
-        function show(){
-            console.log('show');
-            // return undefined;    // 반환값 지정 안할 시 기본 값.
-            return '반환값';
+        let tbl = document.createElement('table');
+        tbl.setAttribute('border', 1);
+
+        let thd = document.createElement('thead');
+        let tbd = document.createElement('tbody');
+        tbd.setAttribute('id', 'list');
+
+        document.querySelector('body').appendChild(show);
+        show.appendChild(tbl);
+        tbl.appendChild(thd);
+        tbl.appendChild(tbd);
+
+        // thead
+        let tr = document.createElement('tr');
+        for (let prop in friends[0]) {
+            let th = document.createElement('th');
+            th.innerText = prop;
+            tr.appendChild(th);
         }
+        thd.append(tr);
 
-        // let show = function(){
-        //     console.log('show');
+        // // tbody
+        // for (let friend of friends) {
+        //     if (friend.age > 3) {
+        //         tr = document.createElement('tr');
+        //         let td = document.createElement('td');
+        //         td.innerText = friend.name;
+        //         tr.appendChild(td);
+        //         td = document.createElement('td');
+        //         td.innerText = friend.age;
+        //         tr.appendChild(td);
+        //         tbd.appendChild(tr);
+        //     }
         // }
-        // => 변수명과 함수명 겹치면 에러
+        
+        // 교수님 답안
+        let tlist = document.querySelector('#list');
+        friends.forEach(makeFriend);
 
-
-        // (): 함수 실행.
-        console.log(show);      // => 함수 정의 출력됨.
-        console.log(show());    // => 함수 실행 + 함수 반환값 출력.
-
-        (function() {
-            console.log('익명함수');
-        })();   // => 익명함수 선언과 동시에 실행.
-
-
-        // 함수, 변수 명명 규칙 : camelCase.
-        function showMyName(){
-            console.log('홍길동');
+        function makeFriend(friend, idx, friendsAry){
+            if(friend['age'] > 3){
+                let tr = document.createElement('tr');
+                for(let prop in friend){
+                    let td = document.createElement('td');
+                    td.innerText = friend[prop];
+                    tr.appendChild(td);
+                }
+                tlist.appendChild(tr);
+            }
         }
-
-
-        // 상수 선언.
-        // 한 번 값 담고 나면 변경 불가능
-        const height = 167.9;
-        //height = 169;   // => error
-
-        // 객체의 상수 선언
-        const friend = {
-            name: '홍길동',
-            phone: '010-1111',
-        };
-        friend.phone = '010-2222';
-        console.log(friend.phone);
-        // 참조하는 주소 값의 속성 바꾸는 것: 에러 아님
-
-        // friend = {};
-        // 객체에 새로운 값 할당하는 것 : 에러
-
-
     </script>
 </body>
+
 </html>

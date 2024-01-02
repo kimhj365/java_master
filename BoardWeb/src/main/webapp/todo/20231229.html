@@ -9,32 +9,51 @@
             width: 300px;
             height: 350px;
             background-color: aqua;
-            text-align: center;
         }
         span {
             display: inline-block;
             width: 90px;
             height: 30px;
             background-color: yellow;
-            margin: 1px;
-            text-align: center;
+            margin: 2px;
         }
     </style>
 
 </head>
 <body>
+    <input type="text" name="userValue" id="userValue">
+    <button id="delBtn">삭제</button>
     <div id="show">
     </div>
     <script>
-        const words = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Earum ullam doloremque, accusamus voluptatem eos assumenda tenetur enim voluptatum corporis, exercitationem odit mollitia adipisci obcaecati alias reiciendis quisquam sunt ea at.';
+        const words = 'Lorem ipsum dolor sit, amet consectetur adipisicing elit.'//
+        +' Earum ullam doloremque, accusamus voluptatem eos assumenda'//
+        +' tenetur enim voluptatum corporis, exercitationem odit mollitia'//
+        +' adipisci obcaecati alias reiciendis quisquam sunt ea at.';
         const wordAry = words.split(' ');
         // 숙제: span 태그로 감싸서 show에 추가추가 해서 쌓기(DOM 사용)
-        wordAry.forEach(function(item, idx, ary){
+        let show = document.querySelector('#show');
+        wordAry.forEach(function(item){
             let spn = document.createElement('span');
             spn.innerText = item;
-            document.querySelector('#show').appendChild(spn);
+            show.appendChild(spn);
         });
-
+        // id=delBtn 에 클릭 이벤트
+        document.querySelector('#delBtn').addEventListener('click', function(){
+            // 사용자의 입력값(userInput) ==
+            // 화면상의 span요소를 가져와서 spanAll: span.remove());
+            // 사용자 입력화면 초기화
+            // let userInput = document.querySelector('input[name=userValue]').value;
+            let userInput = document.querySelector('#userValue').value;
+            let spanAll = document.querySelectorAll('span');
+            for(let item of spanAll) {
+                if(item.innerText == userInput){
+                    item.remove();
+                }
+            };
+            document.querySelector('#userValue').value = '';
+            document.querySelector('#userValue').focus();
+        });
     </script>
 </body>
 </html>
