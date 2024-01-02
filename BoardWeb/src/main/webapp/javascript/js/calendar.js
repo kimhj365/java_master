@@ -1,6 +1,6 @@
 // calendar.js
 
-// 테이블 만들기 (DOM)
+// 테이블 만들기 (DOM) 
 let tbl = document.createElement('table');
 tbl.setAttribute('border', 1);
 document.querySelector('body').appendChild(tbl);

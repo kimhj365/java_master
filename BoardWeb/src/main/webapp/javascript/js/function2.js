@@ -22,7 +22,7 @@ let tbl = document.createElement('table');
 tbl.setAttribute('border', 1);
 document.querySelector('body').appendChild(tbl);
 
-let thd = document.createElement('thead');
+let thd = document.createElement('thead'); 
 thd.setAttribute('id', 'theader');
 tbl.appendChild(thd);
 

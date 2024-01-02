@@ -56,7 +56,7 @@ let obj2 = {
     point: 80
 }
 let average = function(obj1={}, obj2={}){
-    let result = 0;
+    let result = 0; 
     result = ( obj1.point + obj2.point ) / 2;
     return result;
 }

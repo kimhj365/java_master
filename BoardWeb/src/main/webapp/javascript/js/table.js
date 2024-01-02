@@ -1,4 +1,4 @@
-// table.js
+// table.js 
 // 객체 배열로 테이블 만들기 (for문)
 // 테이블 생성 / thead, tbody 연결
 let tbl = document.createElement('table');

@@ -1,4 +1,4 @@
-// dom1.js
+// dom1.js 
 // 객체(object)를 포함한 배열 : [{id, name, phone},...]
 const obj1 = { id: 'user1', name: '홍길동', phone: '010-1111' };
 const obj2 = { id: 'user2', name: '김민수', phone: '010-2222' };

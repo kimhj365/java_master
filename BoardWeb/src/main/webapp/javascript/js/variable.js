@@ -16,7 +16,7 @@
         // (2)
         var name2 = "Hwang";
         function myfunc2(){
-            name2 = "Hong";
+            name2 = "Hong"; 
             console.log(name2);
         }
         myfunc2();            // "Hong"

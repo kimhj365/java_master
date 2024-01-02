@@ -36,7 +36,7 @@ const cal = {
             tr.appendChild(th);
         });
         pos.appendChild(tr);
-    },
+    }, 
 
     makeBody: function (month, pos) {
         let tr = document.createElement('tr');

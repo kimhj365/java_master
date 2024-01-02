@@ -1,5 +1,5 @@
 // function2.js
-// 객체 생성: {}
+// 객체 생성: {} 
 let obj1 = {
     name: '홍길동',
     age: 20,
