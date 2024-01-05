@@ -50,7 +50,6 @@ const numAry = [10, 14, 12, 10];
 const num = new Set(numAry);      // 배열 => Set 변환
 num.forEach(number => console.log(number)); // 중복값 제거됨
 
-
 console.clear();
 map.clear();
 
