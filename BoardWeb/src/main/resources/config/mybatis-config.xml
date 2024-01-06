@@ -13,6 +13,7 @@
   <typeAlias alias="student" type="com.yedam.student.vo.Student"/>
   <typeAlias alias="board" type="com.yedam.board.vo.BoardVO"/>
   <typeAlias alias="member" type="com.yedam.member.vo.MemberVO"/>
+  <typeAlias alias="reply" type="com.yedam.reply.vo.ReplyVO"/>
 </typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -30,5 +31,6 @@
 		<mapper resource="com/yedam/student/mapper/StudentMapper.xml" />
 		<mapper resource="com/yedam/board/mapper/BoardMapper.xml" />
 		<mapper resource="com/yedam/member/mapper/MemberMapper.xml" />
+		<mapper resource="com/yedam/reply/mapper/ReplyMapper.xml"/>
 	</mappers>
 </configuration>
