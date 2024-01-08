@@ -33,13 +33,15 @@ xhtp.send();
 xhtp.onload = function () {
 	console.log(JSON.parse(xhtp.responseText));
 	let result = JSON.parse(xhtp.responseText);
+	console.log(result.data);
 		
 	result.data.forEach(center => {
 		let tr = document.createElement('tr');
 		
 		tr.addEventListener('click', function () {
 			// location.href='map.do?x=' + center.lat + '&y=' + center.lng;
-			window.open("map.do?x=" + center.lat + "&y=" + center.lng)
+			// 지도 경도, 위도, 기관명 파라미터로 넘겨줌
+			window.open("map.do?x=" + center.lat + "&y=" + center.lng + '&facilityName=' + center.facilityName);
 		})
 		
 		fields.forEach(field => {
