@@ -5,16 +5,18 @@
 
 <mapper namespace="com.yedam.reply.mapper.ReplyMapper">
 	<select id="selectList" resultType="reply" parameterType="int">
-		SELECT r.*, m.name
+		SELECT r.*, m.name name
 		FROM reply r 
 		JOIN member m
 		ON r.replyer = m.id
 		WHERE board_no = #{boardNo} ORDER BY 1
 	</select>
+	
 	<delete id="deleteReply" parameterType="int">
 		DELETE reply 
 		WHERE reply_no = #{replyNo}
 	</delete>
+	
 	<insert id="insertReply" parameterType="reply">
 		<selectKey keyProperty="replyNo" resultType="int"
 			order="BEFORE">
@@ -24,13 +26,15 @@
 		INSERT INTO reply 
 		VALUES (#{replyNo}, #{boardNo}, #{reply}, #{replyer}, sysdate)
 	</insert>
+	
 	<select id="selectReply" resultType="reply" parameterType="int">
-		SELECT r.*, m.name
+		SELECT r.*, m.name name
 		FROM reply r JOIN member m
 		ON r.replyer = m.id
 		WHERE
 		reply_no = #{replyNo}
 	</select>
+	
 	<select id="selectListPaging" resultType="reply">
 		SELECT b.* FROM
 			(
@@ -42,12 +46,26 @@
 				JOIN member m
 				ON r.replyer = m.id
 				WHERE board_no = #{boardNo}
-				ORDER BY 1
+				ORDER BY 1 desc
 				) a 
 			) b
 		<![CDATA[
 		WHERE b.rn > (#{page}-1)*5 AND b.rn <= #{page}*5
 		]]>
+	</select>
+	
+	<select id="selectCount" resultType="int" parameterType="int">
+		SELECT COUNT(*) 
+		FROM reply 
+		WHERE board_no=#{boardNo}
+	</select>
+	
+	<select id="selectReplyCnt" resultType="hashmap">
+		SELECT      name "name", COUNT(*) "cnt"
+		FROM        reply r 
+		JOIN        member m
+		ON          r.replyer = m.id
+		GROUP BY    name
 	</select>
 
 </mapper>

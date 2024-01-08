@@ -20,6 +20,8 @@ public class ReplyListJson implements Control {
 		resp.setContentType("text/json;charset=utf-8");
 		String bno = req.getParameter("bno");
 		String page = req.getParameter("page");
+		// 페이지 값 없으면 임의로 1 넣어줌
+		page = page == null ? "1" : page;
 		
 		ReplyService svc = new ReplyServiceImpl();
 		List<ReplyVO> list = svc.replyListPaging(Integer.parseInt(bno), Integer.parseInt(page));

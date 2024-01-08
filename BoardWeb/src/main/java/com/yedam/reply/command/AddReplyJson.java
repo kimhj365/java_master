@@ -19,6 +19,8 @@ public class AddReplyJson implements Control {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		// insert
+		resp.setContentType("text/json;charset=utf-8");
+		
 		String bno = req.getParameter("bno");
 		String reply = req.getParameter("reply");
 		String replyer = req.getParameter("replyer");
@@ -27,7 +29,7 @@ public class AddReplyJson implements Control {
 		vo.setBoardNo(Integer.parseInt(bno));
 		vo.setReply(reply);
 		vo.setReplyer(replyer);
-
+		
 		ReplyService svc = new ReplyServiceImpl();
 		
 		Gson gson = new GsonBuilder().create();

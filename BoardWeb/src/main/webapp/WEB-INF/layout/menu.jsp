@@ -8,26 +8,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Simple Sidebar - Start Bootstrap Template</title>
+        <title>BoardWeb</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
     <body>
-
-    ${logId }
-    ${logName }
         <div class="d-flex" id="wrapper">
             <!-- Sidebar-->
             <div class="border-end bg-white" id="sidebar-wrapper">
             	<!-- if-else문 -->
             	<c:choose>
             		<c:when test="${empty logName }">
-		            	<div class="sidebar-heading border-bottom bg-light">Bootstrap(Guest)</div>
+		            	<div class="sidebar-heading border-bottom bg-light">Guest</div>
             		</c:when>
             		<c:otherwise>
-        		    	<div class="sidebar-heading border-bottom bg-light">Bootstrap(${logName })</div>
+        		    	<div class="sidebar-heading border-bottom bg-light">${logName }</div>
             		</c:otherwise>
             	</c:choose>
             	
