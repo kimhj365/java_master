@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>basic.html</title>
+<!--<script src="../js/jquery-3.7.1.min.js"></script>-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    // javascript 객체(속성, 메소드) vs. jquery 객체(메소드 기반)
+    $(document).ready(function () {
+       
+        // jquery : $("선택자");
+        let ul = $('<ul />').append($('<li />').text('Apple'), // ul -> li -> text : 메소드 체인
+                                    $('<li />').text('Banana')
+                                    );
+        ul.attr('class', 'parent'); // ( == setAttribute)
+        $('#show').append(ul);   // ( == appendChild)
+
+		// JavaScript(DOM)
+		ul = document.createElement('ul');
+        ul.setAttribute('class', 'parent');
+		
+        let li = document.createElement('li');
+        li.innerText = 'Apple';
+        ul.appendChild(li);
+
+        li = document.createElement('li');
+        li.innerText = 'Banana';
+        ul.appendChild(li);
+
+        document.getElementById('dom').appendChild(ul);
+
+        // onclick: ${객체}.on('이벤트 유형', '실행함수'() {})
+        $('#show li').on('mouseover', function () {
+           // 이벤트에서 this: 이벤트 받는 객체
+           $(this).css('background', 'yellow');
+        });
+        $('#show li').on('mouseout', function () {
+           $(this).css('background', '');
+        });
+
+    });
+    
+</script>
+</head>
+<body>
+    <div id="show"></div>
+    <div id="dom"></div>
+</body>
+</html>

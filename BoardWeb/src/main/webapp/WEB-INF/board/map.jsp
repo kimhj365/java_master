@@ -41,7 +41,8 @@ marker.setMap(map);
 // 20240108 숙제
 // map.jsp에서 Hello World 있는 부분
 // covid19.jsp의 facilityName 속성으로 표현하기 => 파라미터 받기
-var iwContent = '<div style="padding:5px;">' + facilityName + ' <br><a href="https://map.kakao.com/link/map/' + facilityName + ',' + x + ',' + y + '" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/' + facilityName + ',' + x + ',' + y + '" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var iwContent = '<div style="padding:5px;">' + facilityName + ' <br><a href="https://map.kakao.com/link/map/' + facilityName + ',' + x + ',' + y + '" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/' + facilityName + ',' + x + ',' + y + '" style="color:blue" target="_blank">길찾기</a></div>',
+// 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
 
 // 인포윈도우를 생성합니다

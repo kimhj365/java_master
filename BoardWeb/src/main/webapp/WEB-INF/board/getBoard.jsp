@@ -111,11 +111,11 @@
 	}
 	
 	// Ajax 호출.
-	function showList(page){
+	function showList_backup(page){
 		ul.innerHTML = '';
 		const xhtp = new XMLHttpRequest();
 		// bno, page 파라미터 넘김
-		xhtp.open('get', 'replyListJson.do?bno=' + bno + "&page=" + page);
+		xhtp.open('get', 'replyListJson.do?bno=' + bno + '&page=' + page);
 		xhtp.send();
 		xhtp.onload = function () {
 			let data = JSON.parse(xhtp.responseText);	// JSON 문자열 => 객체
@@ -124,6 +124,21 @@
 				ul.appendChild(li);
 			});
 		}
+	} //
+	
+	// fetch 활용한 showList 메소드
+	function showList(page) {
+		ul.innerHTML = '';
+		fetch('replyListJson.do?bno=' + bno + '&page=' + page)
+		.then(str => str.json())
+		.then(result => {
+			// console.log(result);
+			result.forEach(reply => {
+				let li = makeLi(reply);
+				ul.appendChild(li);
+			})
+		})
+		.catch(reject => console.log(reject));
 	}
 	showList(pageInfo);	
 	
@@ -181,27 +196,59 @@
 		let reply = document.querySelector('#content').value;
 		let replyer = '${logId}';
 		
-		const addAjax = new XMLHttpRequest();
-		addAjax.open('get', 'addReplyJson.do?reply=' + reply + '&replyer=' + replyer + '&bno=' + bno);
-		addAjax.send();
-		addAjax.onload = function () {
-			let result = JSON.parse(addAjax.responseText);
+
+		// fetch로 표현한 댓글 등록 코드
+		fetch('addReplyJson.do', {
+			method: 'post',
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded'
+			},
+			body: 'reply=' + reply + '&replyer=' + replyer + '&bno=' + bno
+		})
+		.then(str => str.json()) // json 문자열 => 객체
+		.then(result => {
+			console.log(result);
 			if(result.retCode == 'OK'){
 				alert('댓글등록됨.');
-				let reply = result.vo;
-				let li = makeLi(reply);				
-				ul.appendChild(li);
-				
+				// let reply = result.vo;
+				// let li = makeLi(reply);				
+				// ul.appendChild(li);
+				pageInfo = 1;
+				showList(pageInfo);
+				pagingList();
+
 				document.querySelector('#content').value = '';
-				console.log(result);
-				
-				showList(1);
-				pagingList(1);
-				
+
 			} else if (result.retCode == 'NG'){
-				alert('처리 중 에러');
+				alert('처리 중 에러');	// 서버가 응답 했으면 fetch 입장에선 정상실행
 			}
-		}
+		})
+		.catch(err => console.error(err));
+
+		
+		// Ajax 코드(기존)
+
+		// const addAjax = new XMLHttpRequest();
+		// addAjax.open('post', 'addReplyJson.do'); // post 방식: 바디에 데이터 넣음(send())
+		// addAjax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		// addAjax.send('reply=' + reply + '&replyer=' + replyer + '&bno=' + bno);
+		// addAjax.onload = function () {
+		// 	let result = JSON.parse(addAjax.responseText);
+		// 	if(result.retCode == 'OK'){
+		// 		alert('댓글등록됨.');
+		// 		// let reply = result.vo;
+		// 		// let li = makeLi(reply);				
+		// 		// ul.appendChild(li);
+		// 		pageInfo = 1;
+		// 		showList(pageInfo);
+		// 		pagingList();
+
+		// 		document.querySelector('#content').value = '';
+
+		// 	} else if (result.retCode == 'NG'){
+		// 		alert('처리 중 에러');
+		// 	}
+		// } // end of onload
 	}
 	
 </script>
