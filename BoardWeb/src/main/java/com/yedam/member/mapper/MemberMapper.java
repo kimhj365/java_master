@@ -10,5 +10,8 @@ public interface MemberMapper {
 	public MemberVO selectMember(@Param("id") String id, @Param("pw") String pw);
 	public List<MemberVO> selectList();
 	public MemberVO selectOne(String id);
+	// 입력, 삭제
+	public int insertMember(MemberVO vo);
+	public int deleteMember(String id);
 	
 }

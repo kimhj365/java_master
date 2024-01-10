@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test1</title>
+</head>
+<body>
+<!--문제1 -->
+<!-- data.json파일의 정보를 읽어서 급여가 4500이상, 여성회원을 콘솔에 출력하세요. -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+	const data = '../data/data.json'
+
+	const xhtp = new XMLHttpRequest();
+	xhtp.open('get', data, true);
+	xhtp.send();
+	xhtp.onload = function () {
+		let result = JSON.parse(xhtp.responseText);
+		let targetAry = [];
+		
+		result.forEach(data => {
+			if(data.salary > 4500 && data.gender == 'Female'){
+				targetAry.push(data);
+			}
+		});
+		console.log(targetAry);
+	}
+	
+</script>
+</html>

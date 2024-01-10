@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>test2</title>
+</head>
+
+<body>
+	<!--문제2 -->
+	<!-- 2024년 1월 달력을 출력하세요. cal.show() 메소드를 호출. -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
+		// 객체 활용
+		const cal = {
+			show: function () {
+				// 테이블 생성
+				let table = $('<table />').append($('<thead />'), $('<tbody />'));
+				$('body').append(table);
+
+				// thead 만들기
+				let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+				let tr = $('<tr />');
+				days.forEach(day => {
+					tr.append($('<th />').text(day));
+					$('thead').append(tr);
+				})
+				
+				// tbody 만들기
+				tr = $('<tr />');
+				tr.append($('<td />').text(''));
+				for (let i = 1; i <= 31; i++) {
+					let td = $('<td />').text(i);
+					tr.append(td)
+					
+					if((i + 1) % 7 == 0){
+						$('tbody').append(tr);
+						tr = $('<tr />');
+					}
+				}
+				$('tbody').append(tr);
+				
+				table.css('border', '1px solid black');
+				table.css('border-collapse', 'collapse')
+				$('th').css('border', '1px solid black');
+				$('td').css('border', '1px solid black');
+			}
+		}
+		cal.show();
+	</script>
+</body>
+
+</html>

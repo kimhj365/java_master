@@ -13,4 +13,12 @@
 	<select id="selectOne" resultType="member" parameterType="String">
 		SELECT * FROM member WHERE id = #{id} ORDER BY 1
 	</select>
+	<insert id="insertMember"  parameterType="member">
+		INSERT INTO member 
+		VALUES (#{id}, #{pw}, #{name}, #{responsibility}, #{image})
+	</insert>
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM member
+		WHERE id = #{id}		
+	</delete>
 </mapper>

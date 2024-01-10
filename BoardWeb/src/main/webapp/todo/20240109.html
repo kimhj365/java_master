@@ -16,24 +16,36 @@
 				let name = $('input[name="memberName"]').val();
 				let phone = $('input[name="phone"]').val();
 				
-				let template = $('tr.template').clone();
-				template.find('td:first-child').text(id);
-				template.find('td:eq(1)').text(name);
-				template.find('td:eq(2)').text(phone);
-				$('#list').append(template);
-				template.removeAttr('class');
+				// let template = $('tr.template').clone();
+				// template.find('td:first-child').text(id);
+				// template.find('td:eq(1)').text(name);
+				// template.find('td:eq(2)').text(phone);
+				// $('#list').append(template);
+				// template.removeAttr('class');
+
+                let tr = $('<tr />').append($('<td />').text(id),
+                                    $('<td />').text(name),
+                                    $('<td />').text(phone),
+                                    $('<td />').append('<input type="checkbox">')
+                                    );
+                $('#list').append(tr);
 				
 				$('input[name="memberId"]').val('');
 				$('input[name="memberName"]').val('');
 				$('input[name="phone"]').val('');
 			})
 			
+			// 삭제
 			$('#delSelected').on('click', function () {
-				$('td').find(':checked').parentsUntil('tbody').remove();
+				$('tbody input:checked').parentsUntil('tbody').remove();
+				$('thead input[type="checkbox"]').prop('checked', false);
 			})
 			
-			$('th>input[type="checkbox"]').on('checked', function(){
-				console.log(this);
+            // 전체 선택 / 해제
+            console.log($('th').find('input:checkbox'));
+			$('thead input[type="checkbox"]').on('change', function(){
+				console.log(this.checked);
+				$('tbody input[type="checkbox"]').prop('checked', this.checked);
 			})
         });
     </script>
