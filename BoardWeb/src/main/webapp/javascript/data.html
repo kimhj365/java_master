@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data.html</title>
+</head>
+<style>
+    .goodsimg {
+        width: 200px;
+    }
+
+    .goodsborder {
+        border: 3px solid red;
+    }
+</style>
+
+<body>
+    <!-- DOM -->
+
+    <div class="goods">
+        <h1>상품1</h1>
+        <!--class 한번에 여러개 부여 가능-->
+        <img src="/images/레드향.jpg" class="goodsimg goodsborder">
+        <div>가격: 1000</div>
+        <div>
+            <button data-goodsno="g1" class="btn" data-price="1000">주문</button>
+        </div>
+    </div>
+
+    <!-- <div class="goods">
+        <h1>상품2</h1>
+        <img src="/images/블루베리.jpg">
+        <div>가격: 2000</div>
+        <div>
+            <button data-goodsno="g2" class="btn" data-price="2000">주문</button>
+        </div>
+    </div> -->
+
+    <script>
+        // https://cyannara.github.io/javascript/javascript_vs_jquery/
+        //
+        //value
+        // form field에만 사용 가능
+        // 커서 깜빡이는 공간
+        // (input, textarea 등 에만)
+
+        // .innerHTML
+        // 여는 태그-닫는 태그 사이의 내용
+
+        // attribute
+        // 태그 안에 들어가는 속성
+        // ex, class, src, style 속성 등
+
+        // data 속성
+        // data-변수명 = (필요한 정보)
+        // 한번에 여러개 data 속성 사용 가능
+
+        // dataset.속성
+        // data 속성 값 선택/변경 (setAttribute 가능)
+
+        // * 쿼리 선택시 node/nodelist 구별해야함(리스트면 배열 인덱스)
+        // * 버튼 기준으로 부모/형제 태그 불러오는 일 많음  
+
+        // const btn1 = document.querySelector('button');
+        // const btn2 = document.querySelectorAll('button')[1];
+
+        // closest(): 첫번째 부모 엘리먼트
+        // btn1.closest('.goods').querySelector('h1').innerText
+        // btn1.closest('.goods').querySelector('img').getAttribute('src')
+
+        // 이미지 속성 제어
+        // btn1.closest('.goods').querySelector('img').src = "/images/블루베리.jpg"
+
+        // 스타일 속성 제어
+        // btn1.closest('.goods').querySelector('img').style.display = 'none'
+        // btn1.closest('.goods').querySelector('img').style.display = ''
+        // btn1.closest('.goods').querySelector('img').style.width = '200px'
+
+        // classList
+        // 클래스 추가, 삭제(클래스 여러개 가능)
+        // .toggle() : 있으면 빼고 없으면 넣고
+        // document.querySelector('img').classList.remove('goodsimg')  // 클래스 삭제
+        // document.querySelector('img').classList.toggle('goodsimg')  // 클래스 넣다뺐다
+
+        // 캡쳐링 / 버블링 / 전파
+        // 캡쳐링 : 이벤트 발생시 이벤트 발생지점 찾아가는 과정(밖 -> 안 태그)
+        // 버블링 : 이벤트 전파되면서 실행하는 과정(안 -> 밖 태그)
+
+        // 이벤트
+        const btnOrders = document.querySelectorAll('.btn');
+        // for문
+        for (let btn of btnOrders) { // 버튼 전체에 이벤트
+            btn.addEventListener('click', function () {
+                // alert('클릭됨!')
+
+                // 전역객체 (window.) event
+                // : 이벤트 전달한 핸들 안에서만 event 객체 존재함 -> 끝나면 사라짐
+                // debugger;  // 이벤트 멈춤
+                console.log(window.event);
+                console.log(event.target.dataset.goodsno);  // target: 클릭한 엘리먼트 정보
+            });
+        }
+        // forEach문
+        btnOrders.forEach((node) => {
+            node.addEventListener('click', function () {
+                console.log(event.target.dataset.goodsno);
+            });
+        })
+
+        const newNode = `<div class="goods">
+        <h1>상품2</h1>
+        <img src="/images/블루베리.jpg">
+        <div>가격: 2000</div>
+        <div>
+            <button data-goodsno="g2" class="btn" data-price="2000">주문</button>
+        </div>
+        </div>`;
+
+        // 그룹 이벤트(이벤트 위임)
+
+        
+
+    </script>
+</body>
+
+</html>

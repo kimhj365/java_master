@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bootstrap.html</title>
+    <!-- bootstrap link (https://getbootstrap.com/docs/5.3/getting-started/introduction/) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- container -->
+    <div class="container">
+        <!-- grid : 화면 레이아웃 잡을 때 활용 -->
+        <div class="row">
+            <!-- 가로 크기에 따라 배치 달라짐 (sm, md, lg -> 전체 크기 12)-->
+            <!-- m: 마진 / p: 패딩 (https://getbootstrap.com/docs/5.3/utilities/spacing/) -->
+            <div class="col-lg-6 p-2">
+                <!--테이블 (https://getbootstrap.com/docs/5.3/content/tables/) -->
+                <table class="table table-striped table-hover table-success">
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>영화명</th>
+                            <th>개봉일자</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mlist">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-6 border-start">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title mtitle"></h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
+                            the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">상영시간 : <span class="mtime"></span></li>
+                        <li class="list-group-item mdate">개봉일자 : <span class="opendate"></span></li>
+                        <li class="list-group-item">감독 : <span class="director"></span></li>
+                        <li class="list-group-item">배우 : <span class="actors"></span></li>
+                    </ul>
+                    <div class="card-footer">
+                        Card footer
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function movieBoxList() {
+            const url = 'https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20240110'
+            fetch(url)
+                .then(result => result.json())
+                .then(result => {
+                    const list = result.boxOfficeResult.dailyBoxOfficeList;
+
+                    for (let i = 0; i < list.length; i++) {
+                        const newtr = `<tr>
+                            <td>${list[i].rank}</td>
+                            <td class="mtitle" data-mcode="${list[i].movieCd}" onclick="movieinfo()">${list[i].movieNm}</td>
+                            <td>${list[i].openDt}</td>
+                            </tr>`;
+                        mlist.insertAdjacentHTML('beforeend', newtr);
+                    }
+                })
+        }
+
+        function movieinfo() {
+            const movieCd = event.target.dataset.mcode;
+            const url2 = 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=' + movieCd;
+            fetch(url2)
+                .then(result => result.json())
+                .then(result => {
+                    const movieInfo = result.movieInfoResult.movieInfo;
+
+                    // 감독명(배열)
+                    const directors = movieInfo.directors;
+                    document.querySelector('.director').innerHTML='';
+                    directors.forEach((director, idx) => {
+                        let directorNm = director.peopleNm;
+                        if(idx < directors.length-1) {
+                            directorNm += ', ';
+                        }
+                        document.querySelector('.director').innerHTML += directorNm;
+                    })
+
+                    // 개봉일자
+                    const opendate = movieInfo.openDt;
+                    document.querySelector('.opendate').innerHTML = opendate;
+
+                    // 배우명(배열)
+                    const actors = movieInfo.actors;
+                    document.querySelector('.actors').innerHTML ='';
+                    actors.forEach((actor, idx) => {
+                        let actorNm = actor.peopleNm;
+                        if(idx < actors.length-1) {
+                            actorNm += ', ';
+                        }
+                        document.querySelector('.actors').innerHTML += actorNm;
+                    });                   
+                    
+                    // 상영시간
+                    const mtime = movieInfo.showTm + '분';
+                    document.querySelector('.mtime').innerHTML = mtime;
+
+                    // 영화명
+                    const mtitle = movieInfo.movieNm;
+                    document.querySelector('.card-body .mtitle').innerHTML = mtitle;
+                })
+        }
+        movieBoxList();
+    </script>
+</body>
+
+</html>

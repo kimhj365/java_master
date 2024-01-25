@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax2.html</title>
+</head>
+<body>
+<script>
+    const url = 'https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt=20240110'
+    fetch(url)
+    .then(result => result.json())
+    .then(result=>{
+        // console.log는 요소를 HTML과 같은 트리 구조로 출력 하고,
+        // DOM 요소에 대해 특별한 처리를 제공.
+        
+        // console.dir은 요소를 JSON과 같은 트리 구조로 출력 하고,
+        // DOM JS 객체의 전체 표현을 보려고 할 때 유용.
+
+        // 1위 영화 제목만 출력
+        console.dir(result);
+        const movieNm = result.boxOfficeResult.dailyBoxOfficeList[0].movieNm;
+        console.log(movieNm);
+    })
+
+    const url2 = 'https://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/searchMovieInfo.json?key=f5eef3421c602c6cb7ea224104795888&movieCd=20235253';
+    fetch(url2)
+    .then(result => result.json())
+    .then(result=>{
+        console.dir(result);
+        const director = result.movieInfoResult.movieInfo.directors[0].peopleNm;
+        console.log(director);
+    })
+</script>
+</body>
+</html>

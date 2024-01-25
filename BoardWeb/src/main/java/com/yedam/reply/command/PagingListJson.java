@@ -25,6 +25,8 @@ public class PagingListJson implements Control {
 		int total = svc.getTotalCnt(Integer.parseInt(bno));
 		
 		PageDTO dto = new PageDTO(Integer.parseInt(page), total);
+		req.setAttribute("dto", dto);
+		
 		Gson gson = new GsonBuilder().create();
 		
 		try {

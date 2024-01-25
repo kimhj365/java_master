@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jquery.html</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td class="goodsname">상품1</td>
+            <td>1000</td>
+            <td><button data-no="g1">주문</button></td>
+        </tr>
+        <tr>
+            <td class="goodsname">상품2</td>
+            <td>2000</td>
+            <td><button data-no="g2">주문</button></td>
+        </tr>
+        <tr>
+            <td class="goodsname">상품3</td>
+            <td>3000</td>
+            <td><button data-no="g3">주문</button></td>
+        </tr>
+    </table>
+    <script>
+        // < jQuery >
+        // https://cyannara.github.io/javascript/javascript_vs_jquery/
+
+        // setter / getter 개념 없음 -> 같은 함수가 두 가지 기능 포함
+        // 함수 인수 있으면 추가/변경(set)
+        // 함수 인수 없으면 읽기(get)  
+
+        // find(): 선택자 찾기
+        
+        // attribute vs. property
+
+        // 이벤트
+        // bind() / unbind() vs. on() / off()
+        $('button').bind('click', function() {
+            console.log(event.target.dataset.no);  // DOM 방식
+            // event.target :DOM 객체
+            // DOM 객체 -> jquery 객체로 바꾸기: $()로 감싸기
+            console.log($(event.target).data('no'));  // jQuery 방식  
+            
+            // td 찾기
+            console.log(event.target.closest('tr').firstElementChild.innerHTML);  // DOM 방식
+            console.log($(event.target).closest('tr').children().first().html()); // jQuery 방식1
+            console.log($(event.target).closest('tr').find('td').first().html()); // jQuery 방식2
+            console.log($(event.target).closest('tr').find('.goodsname').html()); // jQuery 방식3 (더 많이 씀)
+
+        })  // 버튼 전부 한번에 이벤트 부여
+
+
+        // DOM vs jQuery
+
+        // $('tr')[0]     // DOM 객체 => DOM API 만 사용가능
+        // $('tr').eq(0)  // jQuery 객체
+
+        // $('tr')[0].style.backgroundColor = 'green'      // DOM
+        // $('tr').eq(0).css('backgroundColor', 'cyan')    // jQuery
+
+        // odd(): 홀수 / even(): 짝수 인덱스
+        // ( * 콘솔창 length = 0 이면 jQuery 태그 못 찾은 거)
+
+        // set / get
+        // $('td').eq(0).html()          // get (값 읽기)
+        // $('td').eq(0).html('운동화')  // set (값 변경)
+    </script>
+</body>
+</html>

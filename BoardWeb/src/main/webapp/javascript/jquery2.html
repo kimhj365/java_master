@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h3>바닐라 자바스크립트</h3>
+<input type="text" id="txt">
+<button id=btn type="button">추가</button>
+<ul id="sel">
+	<li>바나나</li>
+	<li>사과</li>
+</ul>
+
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+	// JS 그룹이벤트
+	document.querySelector('ul').addEventListener('click', function() {
+		if( event.target.nodeName == 'LI'){
+			event.target.style.backgroundColor = 'pink';
+		}
+	})
+	
+	// jQuery 그룹이벤트
+//	$('ul').on('click', '.li', function () {
+//		$(event.target).css('backgroundColor', 'yellowgreen')
+//	})
+	
+	$('#btn').on('click', function () {
+		const txtValue = $('#txt').val();
+		$('#sel').append($('<li>').text(txtValue));
+	})
+</script>
+</body>
+</html>

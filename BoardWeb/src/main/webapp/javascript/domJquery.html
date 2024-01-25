@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>doomJquery.html</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <td>10</td>
+            <td>20</td>
+            <td>30</td>
+        </tr>
+    </table>
+    <script>
+        // item : jQuery 객체 아님!
+        // $(item) : jQuery 객체
+        let total = 0;
+        $('td').each((idx, item) => {
+            //console.log(item.innerHTML);
+            //console.log($(item).text());
+            total += parseInt($(item).text())
+        })
+        console.log('total = ', total);
+
+        document.querySelectorAll('td').forEach((item, idx)=>{
+            console.log(item, idx);
+            if(idx=0){
+                return ;
+            }
+        })
+
+        $('td').each((idx, item) => {
+            console.log(item.innerText);
+            if(idx=0){
+                return false;
+            }
+        })
+    </script>
+
+
+    <!-- -->
+    <input type="text" id="txtFruit">
+    <button id="btnAdd">추가</button>
+    <button id="btnDel">삭제</button>
+    <select id="selFruit" size="10">
+        <option>사과
+    </select>
+    
+    <script>
+        $('#btnAdd').on('click', () => {
+            //let op = $('<option>');
+            //op.text($('#txtFruit').val());
+            //$('#selFruit').append(op);
+            $('<option>').text($('#txtFruit').val())
+                         .appendTo($('#selFruit'));
+            $('#txtFruit').val('')
+        })
+
+        $('#txtFruit').on('keypress', () => {
+            if(event.keyCode == 13){
+                $('#btnAdd').click()
+            }
+        })
+
+        $('#btnDel').on('click', ()=>{
+            //$('#selFruit').html('');
+            $('#selFruit').empty();
+        })
+
+
+        
+    </script>
+</body>
+</html>

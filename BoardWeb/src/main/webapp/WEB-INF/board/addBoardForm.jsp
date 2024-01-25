@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <h3>등록화면</h3>
-<form action="addBoard.do" method="post" enctype="multipart/form-data">
+<form action="addBoard.do" method="post">
     <table class="table">
         <tr>
             <th>제목</th>

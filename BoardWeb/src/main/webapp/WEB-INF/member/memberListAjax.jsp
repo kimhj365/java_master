@@ -11,25 +11,12 @@
 <body>
     <h3>회원등록</h3>
     <table>
-        <tbody>
+        <tbody id="list">
             <tr>
                 <th>회원아이디</th>
-                <td><input type="text" name="id"></td>
-            </tr>
-            <tr>
                 <th>회원비밀번호</th>
-                <td><input type="password" name="pw"></td>
-            </tr>
-            <tr>
                 <th>회원이름</th>
-                <td><input type="text" name="name"></td>
-            </tr>
-            <tr>
                 <th>회원사진</th>
-                <td><input type="file" name="image"></td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center"><button id="addBtn">등록</button></td>
             </tr>
         </tbody>
     </table>
